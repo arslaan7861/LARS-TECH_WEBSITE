@@ -47,6 +47,11 @@ export const metadata: Metadata = {
     "Lars Tech",
     "Najibabad software company",
   ],
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   authors: [{ name: "Lars Tech Solutions", url: "https://larstech.in" }],
   creator: "Lars Tech Solutions",
   publisher: "Lars Tech Solutions",
