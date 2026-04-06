@@ -1,7 +1,7 @@
+// components/ui/blobs.tsx
 import { cn } from "@/lib/utils";
-import { motion, useInView, useAnimation } from "framer-motion";
 
-// Animated Blobs Component
+// Animated Blobs Component - Static version for better mobile performance
 export const AnimatedBlobs = ({
   count = 6,
   color = "primary",
@@ -28,50 +28,44 @@ export const AnimatedBlobs = ({
     }
   };
 
+  // Generate static positions - no animations
+  const blobs = Array.from({ length: count }, (_, i) => {
+    const size = Math.random() * 400 + 200;
+    const startX = Math.random() * 100;
+    const startY = Math.random() * 100;
+
+    return {
+      id: i,
+      size,
+      startX,
+      startY,
+      colorClass: getColorClass(),
+    };
+  });
+
   return (
     <div
       className="absolute inset-0 overflow-hidden pointer-events-none"
       suppressHydrationWarning
     >
-      {[...Array(count)].map((_, i) => {
-        const size = Math.random() * 400 + 200;
-        const duration = Math.random() * 30 + 25;
-        const delay = baseDelay + Math.random() * 10;
-        const startX = Math.random() * 100;
-        const startY = Math.random() * 100;
-        const xMove = (Math.random() - 0.5) * 30;
-        const yMove = (Math.random() - 0.5) * 30;
-
-        return (
-          <motion.div
-            suppressHydrationWarning
-            key={i}
-            className={cn("absolute rounded-full blur-3xl", getColorClass())}
-            style={{
-              width: size,
-              height: size,
-              left: `${startX}%`,
-              top: `${startY}%`,
-            }}
-            animate={{
-              x: [0, xMove, -xMove * 0.5, xMove * 0.8, 0],
-              y: [0, yMove, -yMove * 0.6, yMove * 0.7, 0],
-              scale: [1, 1.08, 0.94, 1.06, 1],
-            }}
-            transition={{
-              duration: duration,
-              repeat: Infinity,
-              delay: delay,
-              ease: "easeInOut",
-            }}
-          />
-        );
-      })}
+      {blobs.map((blob) => (
+        <div
+          suppressHydrationWarning
+          key={blob.id}
+          className={cn("absolute rounded-full blur-3xl", blob.colorClass)}
+          style={{
+            width: blob.size,
+            height: blob.size,
+            left: `${blob.startX}%`,
+            top: `${blob.startY}%`,
+          }}
+        />
+      ))}
     </div>
   );
 };
 
-// Floating Blob Component
+// Floating Blob Component - Static version for better mobile performance
 export const FloatingBlob = ({
   className,
   color = "primary",
@@ -102,8 +96,9 @@ export const FloatingBlob = ({
     }
   };
 
+  // Static blob - no animations
   return (
-    <motion.div
+    <div
       suppressHydrationWarning
       className={cn(
         "absolute rounded-full blur-3xl",
@@ -111,17 +106,6 @@ export const FloatingBlob = ({
         size,
         className,
       )}
-      animate={{
-        x: [0, 25, -15, 20, 0],
-        y: [0, -15, 20, -10, 0],
-        scale: [1, 1.05, 0.97, 1.03, 1],
-      }}
-      transition={{
-        duration: speed,
-        repeat: Infinity,
-        delay: delay,
-        ease: "easeInOut",
-      }}
     />
   );
 };
