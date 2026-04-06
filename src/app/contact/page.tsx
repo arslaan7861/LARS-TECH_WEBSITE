@@ -1,5 +1,26 @@
 // src/app/contact/page.tsx
-"use client";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Us | Lars Tech Solutions",
+  description:
+    "Get in touch with Lars Tech Solutions. We're here to discuss your software development needs and provide expert solutions for your business challenges.",
+  keywords: [
+    "contact Laravel Tech",
+    "get in touch",
+    "software consultation",
+    "contact form",
+    "business inquiry",
+  ],
+  openGraph: {
+    title: "Contact Us | Lars Tech Solutions",
+    description:
+      "Reach out to us for your software development project or consultation.",
+    url: "https://larstech.in/contact",
+  },
+};
+
+("use client");
 
 import { useState } from "react";
 import { motion } from "framer-motion";

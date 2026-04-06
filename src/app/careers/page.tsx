@@ -1,5 +1,27 @@
 // src/app/careers/page.tsx
-"use client";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Careers | Lars Tech Solutions",
+  description:
+    "Join our talented team at Lars Tech Solutions. Explore exciting career opportunities in software development, design, and more. Build your future with us.",
+  keywords: [
+    "careers",
+    "jobs",
+    "hiring",
+    "software developer jobs",
+    "work with us",
+    "recruitment",
+  ],
+  openGraph: {
+    title: "Careers | Lars Tech Solutions",
+    description:
+      "Join our team and grow your career in software development and technology.",
+    url: "https://larstech.in/careers",
+  },
+};
+
+("use client");
 
 import { useState } from "react";
 import { motion } from "framer-motion";

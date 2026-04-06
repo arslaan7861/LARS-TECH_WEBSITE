@@ -1,5 +1,6 @@
 // app/layout.tsx
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -107,6 +108,51 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Lars Tech Solutions",
+    url: "https://larstech.in",
+    logo: "https://larstech.in/logo-full.png",
+    description:
+      "Modern software development company delivering scalable, high-quality digital solutions. Specialized in custom software, web applications, SaaS products, and School ERP systems.",
+    foundingDate: "2020",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Najibabad",
+      addressRegion: "Uttar Pradesh",
+      addressCountry: "IN",
+    },
+    sameAs: [
+      "https://www.linkedin.com/company/lars-tech",
+      "https://twitter.com/larstech",
+      "https://www.instagram.com/larstech",
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Customer Support",
+      email: "contact@larstech.in",
+    },
+  };
+
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Lars Tech Solutions",
+    image: "https://larstech.in/logo-full.png",
+    description:
+      "Software development company in Najibabad providing custom software solutions and ERP systems",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Najibabad",
+      addressRegion: "Uttar Pradesh",
+      postalCode: "246301",
+      addressCountry: "IN",
+    },
+    telephone: "+91-XXXXXXXXXX",
+    url: "https://larstech.in",
+  };
+
   return (
     <html
       lang="en"
@@ -120,6 +166,22 @@ export default function RootLayout({
       )}
       suppressHydrationWarning
     >
+      <head>
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+        <Script
+          id="local-business-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessSchema),
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-background">
         <Navbar />
         <main className="flex-1">{children}</main>

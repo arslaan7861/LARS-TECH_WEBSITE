@@ -1,5 +1,28 @@
 // src/app/school-erp/page.tsx
-"use client";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "School ERP System | Lars Tech Solutions",
+  description:
+    "Comprehensive School ERP system - Manage students, staff, academics, attendance, fees, and communications all in one platform. Transform your school management.",
+  keywords: [
+    "school ERP",
+    "school management system",
+    "student management",
+    "school administration",
+    "educational ERP",
+    "school software",
+    "school management software",
+  ],
+  openGraph: {
+    title: "School ERP System | Lars Tech Solutions",
+    description:
+      "All-in-one school management solution for modern educational institutions.",
+    url: "https://larstech.in/school-erp",
+  },
+};
+
+("use client");
 
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
