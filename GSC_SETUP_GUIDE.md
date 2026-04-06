@@ -3,6 +3,7 @@
 A complete step-by-step guide to set up and optimize your website for Google search visibility.
 
 ## Table of Contents
+
 1. [What is Google Search Console?](#what-is-google-search-console)
 2. [Initial Setup](#initial-setup)
 3. [Domain Verification](#domain-verification)
@@ -16,6 +17,7 @@ A complete step-by-step guide to set up and optimize your website for Google sea
 ## What is Google Search Console?
 
 Google Search Console (GSC) is a free service from Google that helps you:
+
 - Monitor and maintain your website's presence in Google Search
 - Submit sitemaps for indexing
 - Identify crawl errors and issues
@@ -28,20 +30,24 @@ Google Search Console (GSC) is a free service from Google that helps you:
 ## Initial Setup
 
 ### Step 1: Create a Google Account
+
 If you don't have one already, create a Google account at https://accounts.google.com
 
 ### Step 2: Access Google Search Console
+
 1. Go to https://search.google.com/search-console
 2. Sign in with your Google account
 3. Click "Start Now" or "Go to Search Console"
 
 ### Step 3: Add Property
+
 1. Click the **+ CREATE PROPERTY** button (top left)
 2. Choose property type:
    - **Domain**: For the entire domain (recommended for https://larstech.in)
    - **URL prefix**: For specific URL (e.g., https://larstech.in)
 
 **Recommendation**: Use Domain property type to cover:
+
 - https://larstech.in
 - http://larstech.in
 - www.larstech.in
@@ -54,6 +60,7 @@ If you don't have one already, create a Google account at https://accounts.googl
 ### Option 1: DNS TXT Record (Recommended for Domain Property)
 
 **Why this method?**
+
 - Verifies domain ownership once
 - Covers all subdomains automatically
 - More secure
@@ -95,6 +102,7 @@ If you don't have one already, create a Google account at https://accounts.googl
 3. Click "Verify" in GSC
 
 **For your site, add to layout.tsx:**
+
 ```tsx
 <meta name="google-site-verification" content="your-verification-code-here" />
 ```
@@ -104,7 +112,9 @@ If you don't have one already, create a Google account at https://accounts.googl
 ## Sitemap Submission
 
 ### Step 1: Verify Sitemap Exists
+
 Your sitemap is already created at:
+
 - **Location**: `/public/sitemap.xml`
 - **URL**: `https://larstech.in/sitemap.xml`
 
@@ -120,12 +130,14 @@ Your sitemap is already created at:
 5. Wait for processing (can take a few hours)
 
 ### Step 3: Monitor Sitemap Status
+
 - **Status column**: Shows "Success" when processed
 - **Submitted URLs**: Number of URLs you submitted
 - **Indexed URLs**: How many Google has indexed
 - **Read Errors**: Any issues with the sitemap
 
 **Expected behavior:**
+
 - Initial submission may show: "Pending" → "Success"
 - Indexed URLs may be less than submitted URLs (normal)
 - URLs not in Google's index yet will be crawled over time
@@ -137,7 +149,9 @@ Your sitemap is already created at:
 ### Key Reports to Review
 
 #### 1. Performance Report
+
 **Path**: Performance
+
 - **Shows**: Click-through rate (CTR), impressions, average position
 - **How to use**:
   - Identify top-performing keywords
@@ -145,7 +159,9 @@ Your sitemap is already created at:
   - Track keyword rankings over time
 
 #### 2. Coverage Report
+
 **Path**: Indexing → Coverage
+
 - **Shows**: Which pages are indexed, excluded, or have errors
 - **What to look for**:
   - ❌ **Excluded**: Pages Google isn't indexing (check robots.txt)
@@ -153,22 +169,29 @@ Your sitemap is already created at:
   - ✅ **Valid**: Successfully indexed pages
 
 #### 3. Sitemaps Report
+
 **Path**: Indexing → Sitemaps
+
 - Verify sitemap submission status
 - Check indexed vs. submitted URLs
 
 #### 4. Core Web Vitals
+
 **Path**: Experience → Core Web Vitals
+
 - Mobile-friendliness
 - Page experience metrics
 - Loading performance
 
 #### 5. Mobile Usability
+
 **Path**: Experience → Mobile Usability
+
 - Check mobile compatibility
 - Identify mobile-specific issues
 
 ### Setting Up Alerts
+
 1. Go to **Settings** (bottom left)
 2. Enable notifications for:
    - Crawl errors
@@ -181,35 +204,44 @@ Your sitemap is already created at:
 ## Troubleshooting
 
 ### "URL not found on your site"
+
 **Cause**: Google tried to crawl a URL that doesn't exist
 **Solution**:
+
 - Check if page was deleted (add redirect if so)
 - Review robots.txt to ensure page isn't blocked
 - Re-submit sitemap
 
 ### Low Indexation Rate
+
 **Cause**: Many URLs submitted but few indexed
 **Solutions**:
+
 - Ensure pages have good content (minimum 300 words recommended)
 - Improve code quality (fix markup errors)
 - Increase internal linking
 - Improve page load speed
 
 ### Sitemap Errors
+
 **Check**:
+
 - Sitemap URL is correct and accessible
 - XML format is valid
 - No special characters breaking XML structure
 - URLs are complete and canonical
 
 **Test sitemap validity:**
+
 ```bash
 # Copy sitemap URL in browser to download and verify
 https://larstech.in/sitemap.xml
 ```
 
 ### Pages Not Ranking
+
 **SEO Checklist**:
+
 - ✅ Unique, descriptive titles (already added)
 - ✅ Meta descriptions (already added)
 - ✅ Structured data/Schema (already added)
@@ -224,33 +256,40 @@ https://larstech.in/sitemap.xml
 ## Best Practices
 
 ### 1. Update Sitemap Regularly
+
 - Update `sitemap.xml` when adding new pages
 - Change `<lastmod>` date when content changes
 - Submit new sitemap in GSC
 
 ### 2. Monitor Keywords
+
 - Check "Performance" report monthly
 - Identify keywords with high impressions but low CTR
 - Optimize titles and meta descriptions for those keywords
 
 ### 3. Fix Issues Promptly
+
 - Review "Coverage" report monthly
 - Fix crawl errors within 24-48 hours
 - Remove broken internal links
 
 ### 4. Improve Page Experience
+
 - Use Core Web Vitals report to optimize speed
 - Ensure mobile responsiveness
 - Minimize Cumulative Layout Shift
 
 ### 5. Content Strategy
+
 - Target keywords with search intent (informational, transactional)
 - Create comprehensive content (1500+ words for service pages)
 - Update old content regularly
 - Add internal links to related pages
 
 ### 6. Technical SEO
+
 Verify these are correct:
+
 - ✅ Canonical tags (set in layout.tsx)
 - ✅ Robots meta tags (already configured)
 - ✅ Structured data (Organization & LocalBusiness schema added)
@@ -260,17 +299,21 @@ Verify these are correct:
 - ✅ Mobile-friendly design (responsive layout)
 
 ### 7. Regular Maintenance
+
 **Monthly:**
+
 - Review Performance report
 - Check Coverage for new errors
 - Verify sitemap status
 
 **Quarterly:**
+
 - Analyze top/bottom performing pages
 - Update underperforming content
 - Check Core Web Vitals
 
 **Yearly:**
+
 - Full SEO audit
 - Competitor analysis
 - Content refresh strategy
@@ -280,6 +323,7 @@ Verify these are correct:
 ## Requesting Indexing
 
 ### Manual Indexing Request
+
 When you publish a new important page:
 
 1. Go to **Indexing** section in GSC
@@ -289,7 +333,9 @@ When you publish a new important page:
 5. Google typically crawls within 24-48 hours
 
 ### Using Search Console API
+
 For automated submissions (advanced):
+
 ```bash
 # Example: Submit URL for crawling
 POST https://www.googleapis.com/urlnotification/v1/urlNotifications:publish
@@ -303,15 +349,15 @@ POST https://www.googleapis.com/urlnotification/v1/urlNotifications:publish
 
 ## Quick Timeline Expectations
 
-| Timeline | What to Expect |
-|----------|---|
-| **Immediately** | Verification pending |
-| **1-3 days** | Domain verified in GSC |
-| **1-3 days** | Sitemap submitted and processing |
-| **1-2 weeks** | Homepage and main pages indexed |
-| **2-4 weeks** | Most pages indexed and appearing in search results |
-| **4-12 weeks** | Full visibility in Google search results |
-| **3-6 months** | Solid rankings for target keywords |
+| Timeline        | What to Expect                                     |
+| --------------- | -------------------------------------------------- |
+| **Immediately** | Verification pending                               |
+| **1-3 days**    | Domain verified in GSC                             |
+| **1-3 days**    | Sitemap submitted and processing                   |
+| **1-2 weeks**   | Homepage and main pages indexed                    |
+| **2-4 weeks**   | Most pages indexed and appearing in search results |
+| **4-12 weeks**  | Full visibility in Google search results           |
+| **3-6 months**  | Solid rankings for target keywords                 |
 
 ---
 
@@ -349,10 +395,12 @@ POST https://www.googleapis.com/urlnotification/v1/urlNotifications:publish
 ## Support & Contact
 
 For issues with Google Search Console:
+
 - Visit the [Google Search Central Community](https://support.google.com/webmasters/community)
 - Contact Google support through your GSC account
 
 For website optimization questions:
+
 - Review your Core Web Vitals in GSC
 - Analyze Performance report for user behavior insights
 - Use URL Inspection tool to debug individual pages

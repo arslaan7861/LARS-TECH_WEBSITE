@@ -1,27 +1,6 @@
+"use client";
+
 // src/app/about/page.tsx
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "About Us | Lars Tech Solutions",
-  description:
-    "Learn about Lars Tech Solutions - a modern software development company committed to delivering innovative, scalable solutions that drive business growth and transformation.",
-  keywords: [
-    "about Lars Tech",
-    "software company",
-    "development team",
-    "technology solutions",
-    "business transformation",
-  ],
-  openGraph: {
-    title: "About Us | Lars Tech Solutions",
-    description:
-      "Discover our mission, vision, and the team behind innovative software solutions.",
-    url: "https://larstech.in/about",
-  },
-};
-
-("use client");
-
 import { useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 import Link from "next/link";

@@ -1,29 +1,6 @@
+"use client";
+
 // src/app/services/page.tsx
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Our Services | Lars Tech Solutions",
-  description:
-    "Explore our comprehensive software development services including custom software, web applications, cloud solutions, and School ERP systems tailored to your business needs.",
-  keywords: [
-    "software development services",
-    "web development",
-    "custom software solutions",
-    "cloud services",
-    "database solutions",
-    "ERP systems",
-    "business automation",
-  ],
-  openGraph: {
-    title: "Our Services | Lars Tech Solutions",
-    description:
-      "Professional software development services including custom solutions, web apps, cloud services, and ERP systems.",
-    url: "https://larstech.in/services",
-  },
-};
-
-("use client");
-
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 import Link from "next/link";
