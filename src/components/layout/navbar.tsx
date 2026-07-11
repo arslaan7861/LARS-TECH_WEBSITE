@@ -25,6 +25,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { toast } from "sonner";
+import { test } from "next/experimental/testmode/playwright";
 
 // Service items data
 const services = [
@@ -121,8 +123,22 @@ export function Navbar() {
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setOpenDropdown(null);
+    // testEvent(); // Track page view on route change
   }, [pathname]);
-
+  const testEvent = () => {
+    const tryTrack = (retries = 15) => {
+      if (typeof window !== "undefined" && window.YourCRM) {
+        window.YourCRM.track("page_view", {
+          path: window.location.pathname,
+          title: document.title,
+          url: window.location.href,
+        });
+      } else if (retries > 0) {
+        setTimeout(() => tryTrack(retries - 1), 100); // poll every 100ms
+      }
+    };
+    tryTrack();
+  };
   const isActive = useCallback(
     (href: string) => {
       if (href === "/") return pathname === href;

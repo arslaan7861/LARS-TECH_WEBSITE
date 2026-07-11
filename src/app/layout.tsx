@@ -8,6 +8,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import Test from "./test";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -179,6 +180,13 @@ export default function RootLayout({
             __html: JSON.stringify(organizationSchema),
           }}
         />
+        <script
+          src="http://localhost:4000/public/sdk/tracking.js"
+          data-tracking-key="trk_twk2wqMtA2FmEeTAiA7cCviw"
+          data-api-base-url="http://localhost:4000"
+          type="module"
+          async
+        />
         <Script
           id="local-business-schema"
           type="application/ld+json"
@@ -189,6 +197,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-background">
         <Navbar />
+        <Test />
         <main className="flex-1">{children}</main>
         <Footer />
         <Toaster position="top-right" richColors />
