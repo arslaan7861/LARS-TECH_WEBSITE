@@ -125,20 +125,7 @@ export function Navbar() {
     setOpenDropdown(null);
     // testEvent(); // Track page view on route change
   }, [pathname]);
-  const testEvent = () => {
-    const tryTrack = (retries = 15) => {
-      if (typeof window !== "undefined" && window.YourCRM) {
-        window.YourCRM.track("page_view", {
-          path: window.location.pathname,
-          title: document.title,
-          url: window.location.href,
-        });
-      } else if (retries > 0) {
-        setTimeout(() => tryTrack(retries - 1), 100); // poll every 100ms
-      }
-    };
-    tryTrack();
-  };
+
   const isActive = useCallback(
     (href: string) => {
       if (href === "/") return pathname === href;
