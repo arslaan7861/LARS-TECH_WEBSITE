@@ -180,12 +180,41 @@ export default function RootLayout({
             __html: JSON.stringify(organizationSchema),
           }}
         />
-        <script
+
+        {/* <script
+          src="https://api.dolfin360.com/public/sdk/tracking.js"
+          data-tracking-key="trk_o7LImy1NSPaHDpnMPOvMHZfm"
+          data-api-base-url="https://api.dolfin360.com"
+          type="module"
+          async
+        /> */}
+        {/* <script
+          type="module"
           src="http://localhost:4000/public/sdk/tracking.js"
           data-tracking-key="trk_twk2wqMtA2FmEeTAiA7cCviw"
           data-api-base-url="http://localhost:4000"
-          type="module"
           async
+        ></script> */}
+        {/* <script
+          type="module"
+          src="https://api.dolfin360.com/public/sdk/tracking.js"
+          data-tracking-key="trk__wL-AB3Vt0OCceEcQogG6eRm"
+          data-api-base-url="https://api.dolfin360.com"
+          async
+        ></script> */}
+        {/* <script
+          type="module"
+          src="http://localhost:3000/public/sdk/tracking.js"
+          data-tracking-key="trk__wL-AB3Vt0OCceEcQogG6eRm"
+          data-api-base-url="http://localhost:3000"
+          async
+        ></script> */}
+        <Script
+          src="https://api.dolfin360.com/public/sdk/tracking.js"
+          data-tracking-key="trk_o7LImy1NSPaHDpnMPOvMHZfm"
+          data-api-base-url="https://api.dolfin360.com"
+          strategy="afterInteractive"
+          type="module"
         />
         <Script
           id="local-business-schema"
