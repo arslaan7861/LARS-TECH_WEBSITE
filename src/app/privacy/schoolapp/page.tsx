@@ -40,8 +40,8 @@ const staggerContainer = {
   },
 };
 
-// Data the app accesses (already managed by the school)
-const accessedData = [
+// Data the app accesses (already managed by the school) — student-facing
+const accessedDataStudents = [
   "Student name",
   "Admission number or student ID",
   "Class and section",
@@ -51,6 +51,16 @@ const accessedData = [
   "Assignments and homework",
   "Fee information",
   "Announcements and notices",
+];
+
+// Data accessed by teacher and admin accounts
+const accessedDataStaff = [
+  "Staff name and employee/staff ID",
+  "Role and assigned classes or subjects",
+  "Contact details used for school communication",
+  "Class rosters and student records relevant to assigned classes",
+  "Attendance and grading entries made by the staff member",
+  "School announcements and notices",
 ];
 
 // Notification types
@@ -76,8 +86,9 @@ const doesNotCollect = [
 // How information is used
 const usagePoints = [
   "Authenticate users",
-  "Display student information",
-  "Provide access to school records",
+  "Display student, teacher, and admin information relevant to each account's role",
+  "Provide access to school records appropriate to each user's permissions",
+  "Allow teachers and admins to record and manage school data (e.g. attendance, grades)",
   "Send school notifications",
   "Maintain the security and reliability of the service",
 ];
@@ -87,7 +98,12 @@ const policySections = [
   {
     title: "Data Storage",
     icon: Server,
-    body: "Student information is stored securely within the School ERP system managed by the respective educational institution. The App acts as a secure interface for accessing this information and does not permanently store student records on the device except where necessary for normal application functionality.",
+    body: "Student, teacher, and administrative information is stored securely within the School ERP system managed by the respective educational institution. The App acts as a secure interface for accessing and, for authorized teacher and admin accounts, updating this information. It does not permanently store records on the device except where necessary for normal application functionality.",
+  },
+  {
+    title: "Role-Based Access",
+    icon: Lock,
+    body: "The App supports student, teacher, and admin accounts, each with access limited to the information and actions appropriate to that role. Teachers can access data for their assigned classes and subjects; admins can access broader school data as configured by the institution. Access levels are determined and controlled by the school.",
   },
   {
     title: "Third-Party Services",
@@ -96,18 +112,18 @@ const policySections = [
   },
   {
     title: "Data Security",
-    icon: Lock,
-    body: "We implement reasonable administrative, technical, and organizational measures to protect information from unauthorized access, disclosure, alteration, or destruction.",
+    icon: Shield,
+    body: "We implement reasonable administrative, technical, and organizational measures to protect information from unauthorized access, disclosure, alteration, or destruction, across all account types.",
   },
   {
     title: "Children's Privacy",
     icon: Users,
-    body: "The App is intended for use by students under the supervision of their educational institution and parents or guardians where applicable. The App does not knowingly collect personal information directly from children beyond information already maintained by the school for educational purposes.",
+    body: "The App is intended for use by students under the supervision of their educational institution and parents or guardians where applicable, as well as by teachers and administrators acting in their professional capacity. The App does not knowingly collect personal information directly from children beyond information already maintained by the school for educational purposes.",
   },
   {
     title: "Data Retention",
     icon: FileText,
-    body: "Student information remains under the control of the educational institution using the School ERP platform. Data retention is governed by the policies of the respective school.",
+    body: "Student, teacher, and administrative information remains under the control of the educational institution using the School ERP platform. Data retention is governed by the policies of the respective school.",
   },
   {
     title: "Changes to This Privacy Policy",
@@ -155,7 +171,7 @@ export default function SchoolAppPrivacyPage() {
             <motion.div variants={fadeInUp}>
               <Badge className="mb-6 bg-primary/10 text-primary hover:bg-primary/20 transition-all duration-300 px-4 py-1.5 text-sm backdrop-blur-sm">
                 <Sparkles className="w-3 h-3 mr-1 inline" />
-                School ERP Student App
+                School ERP App — Students, Teachers &amp; Admins
               </Badge>
             </motion.div>
 
@@ -172,24 +188,25 @@ export default function SchoolAppPrivacyPage() {
               variants={fadeInUp}
               className="text-muted-foreground text-lg mb-2"
             >
-              Effective Date: July 13, 2026
+              Effective Date: August 2, 2026
             </motion.p>
 
             <motion.p
               variants={fadeInUp}
               className="text-muted-foreground leading-relaxed"
             >
-              This Privacy Policy explains how the School ERP Student App ("the
-              App") handles information when you use our services. The App is
-              intended solely for students and authorized users of schools using
-              our School ERP platform, and allows students to securely access
-              information already maintained by their educational institution.
+              This Privacy Policy explains how the School ERP App ("the App")
+              handles information when you use our services. The App is
+              intended for students, teachers, and administrators of schools
+              using our School ERP platform, and allows each type of user to
+              securely access and, where authorized, manage information
+              maintained by their educational institution.
             </motion.p>
           </motion.div>
         </div>
       </section>
 
-      {/* Information We Access */}
+      {/* Information We Access — Students */}
       <section className="py-16 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -202,22 +219,69 @@ export default function SchoolAppPrivacyPage() {
             <motion.div variants={fadeInUp}>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 <Eye className="w-3 h-3 mr-1 inline" />
-                What We Access
+                What We Access — Students
               </Badge>
               <h2 className="text-2xl lg:text-3xl font-bold mb-4">
-                Information We Access
+                Information We Access for Student Accounts
               </h2>
               <p className="text-muted-foreground">
-                The App displays information already provided and managed by
-                your school through the School ERP system. The App does not
-                create or collect new personal information beyond what is
-                required for authentication and providing these services.
+                For student accounts, the App displays information already
+                provided and managed by the school through the School ERP
+                system. The App does not create or collect new personal
+                information for students beyond what is required for
+                authentication and providing these services.
               </p>
             </motion.div>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            {accessedData.map((item, index) => (
+            {accessedDataStudents.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-3 p-3 rounded-xl bg-background/80 backdrop-blur-sm border hover:border-primary/30 transition-colors"
+              >
+                <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                <span className="text-sm">{item}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Information We Access — Teachers & Admins */}
+      <section className="py-16 relative z-0">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="max-w-2xl mx-auto text-center mb-12"
+          >
+            <motion.div variants={fadeInUp}>
+              <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
+                <Users className="w-3 h-3 mr-1 inline" />
+                What We Access — Teachers &amp; Admins
+              </Badge>
+              <h2 className="text-2xl lg:text-3xl font-bold mb-4">
+                Information We Access for Teacher and Admin Accounts
+              </h2>
+              <p className="text-muted-foreground">
+                Teacher and admin accounts access information relevant to
+                their role, as configured by the school. This may include
+                staff details and, for the purpose of performing their
+                duties, class and student records within their assigned
+                scope.
+              </p>
+            </motion.div>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            {accessedDataStaff.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -253,10 +317,10 @@ export default function SchoolAppPrivacyPage() {
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 The App uses push notifications to deliver important updates
-                from your school. To provide these notifications, your device
-                receives a notification token from the notification service.
-                This token is used solely to deliver notifications to your
-                device.
+                to students, teachers, and admins. To provide these
+                notifications, your device receives a notification token from
+                the notification service. This token is used solely to
+                deliver notifications to your device.
               </p>
             </motion.div>
 
@@ -301,8 +365,8 @@ export default function SchoolAppPrivacyPage() {
                 Information We Do Not Collect
               </h2>
               <p className="text-muted-foreground">
-                The App does not collect or sell personal information for
-                advertising or marketing purposes.
+                The App does not collect or sell personal information — for
+                any user role — for advertising or marketing purposes.
               </p>
             </motion.div>
           </motion.div>
@@ -344,7 +408,7 @@ export default function SchoolAppPrivacyPage() {
                 How Information Is Used
               </h2>
               <p className="text-muted-foreground">
-                Information displayed in the App is used only to:
+                Information accessed in the App is used only to:
               </p>
             </motion.div>
           </motion.div>
@@ -427,10 +491,11 @@ export default function SchoolAppPrivacyPage() {
             </h2>
             <p className="text-white/90 leading-relaxed mb-8">
               If you have questions about your personal information or wish to
-              request correction or deletion of your records, please contact
-              your educational institution directly. For questions about this
-              Privacy Policy, please contact your school or the administrator
-              responsible for your School ERP services.
+              request correction or deletion of your records — whether as a
+              student, teacher, or admin — please contact your educational
+              institution directly. For questions about this Privacy Policy,
+              please contact your school or the administrator responsible for
+              your School ERP services.
             </p>
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/30 rounded-xl px-5 py-3 text-white">
               <Mail className="w-4 h-4" />
