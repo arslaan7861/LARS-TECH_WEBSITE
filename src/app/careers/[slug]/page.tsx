@@ -126,11 +126,15 @@ export default async function JobDetailPage({ params }: PageProps) {
             </Link>
           </div>
 
+          {/* Top Leaderboard AdBanner */}
+          <AdBanner slot={adsConfig.slots.careersFeed} className="my-6 max-w-full" />
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content (2 cols) */}
             <div className="lg:col-span-2 space-y-8">
               {/* Header Box */}
               <div className="space-y-4">
+
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge variant="secondary" className="px-3 py-1">
                     {job.department}

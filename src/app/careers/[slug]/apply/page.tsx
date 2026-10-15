@@ -24,6 +24,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
+import { AdBanner } from "@/components/common/ad-banner";
+import { adsConfig } from "@/config/ads";
 
 interface ApplyPageProps {
   params: Promise<{ slug: string }>;
@@ -153,6 +155,9 @@ export default function ApplyJobPage({ params }: ApplyPageProps) {
             Back to Job Details
           </Link>
         </div>
+
+        {/* Top Ad Banner */}
+        <AdBanner slot={adsConfig.slots.careersFeed} className="my-6 max-w-full" />
 
         <Card className="shadow-xl border-border/80">
           <CardHeader>
@@ -317,6 +322,9 @@ export default function ApplyJobPage({ params }: ApplyPageProps) {
             </form>
           </CardContent>
         </Card>
+
+        {/* Bottom Ad Banner */}
+        <AdBanner slot={adsConfig.slots.careersFeed} className="my-8 max-w-full" />
       </div>
     </main>
   );
