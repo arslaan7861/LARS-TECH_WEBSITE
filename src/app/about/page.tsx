@@ -28,15 +28,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
-
 import {
   companyValues as values,
   milestones,
-  teamMembers as team,
 } from "@/data/company";
 
 // Stats
@@ -334,44 +330,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership Team Section */}
-      <section className="py-20 relative z-0">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
-              Leadership
-            </Badge>
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-              Meet Our Team
-            </h2>
-            <p className="text-muted-foreground">
-              Passionate experts dedicated to your success
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member, index) => (
-              <div key={index}>
-                <Card className="text-center hover:shadow-xl transition-all duration-300 group bg-background/80 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <Avatar className="w-32 h-32 mx-auto mb-4 ring-4 ring-primary/10 group-hover:ring-primary/20 transition-all">
-                      <AvatarImage src={member.image} alt={member.name} />
-                      <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <h3 className="font-semibold text-lg">{member.name}</h3>
-                    <p className="text-sm text-primary font-medium mb-2">
-                      {member.role}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {member.bio}
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Location Section */}
       <section className="py-20 relative z-0">
