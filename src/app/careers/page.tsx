@@ -223,6 +223,9 @@ export default async function CareersPage() {
       {/* Current Openings Section */}
       <section id="openings" className="py-20 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* AdSense Placement above Current Openings */}
+          <AdBanner slot={adsConfig.slots.careersFeed} className="mb-14 max-w-4xl" />
+
           <div className="text-center max-w-2xl mx-auto mb-12">
             <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
               Join Us
