@@ -54,10 +54,10 @@ const schoolErpItems = [
 const navItems = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
+  { name: "School ERP", href: "/school-erp" },
+  { name: "Blog", href: "/blog" },
+  { name: "Careers", href: "/careers" },
   { name: "Contact", href: "/contact" },
-  { name: "Careers", href: "/careers" }, // Added back since page exists
-  { name: "School ERP", href: "/school-erp" }, // Added back since page exists
-  // Careers page exists but we're keeping it in mobile menu only for now
 ];
 
 export function Navbar() {

@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+// src/app/careers/page.tsx
 import Link from "next/link";
 import {
   Briefcase,
@@ -39,12 +37,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
-import { jobOpenings } from "@/data/company";
+import { AdBanner } from "@/components/common/ad-banner";
+import { getJobs } from "@/lib/data-service";
+import { adsConfig } from "@/config/ads";
 
 // Benefits
 const benefits = [
@@ -64,109 +60,88 @@ const benefits = [
     icon: Clock,
   },
   {
-    title: "Learning Budget",
-    description: "₹50,000/year for courses & conferences",
-    icon: BookOpen,
+    title: "Latest Tech Stack",
+    description: "Work with modern technologies and tools",
+    icon: Laptop,
   },
   {
-    title: "Home Office Setup",
-    description: "One-time budget for home office equipment",
-    icon: Home,
+    title: "Paid Time Off",
+    description: "Generous vacation policy and holidays",
+    icon: Calendar,
   },
   {
-    title: "Free Meals",
-    description: "Daily lunch and unlimited coffee/tea",
-    icon: CoffeeIcon,
-  },
-  {
-    title: "Annual Retreat",
-    description: "Yearly company offsite and team building",
-    icon: Plane,
-  },
-  {
-    title: "Wellness Program",
-    description: "Gym membership & mental health support",
-    icon: HeartHandshake,
-  },
-];
-
-// Company culture points
-const culturePoints = [
-  {
-    title: "Innovation First",
-    description: "We encourage experimentation and new ideas",
-    icon: Sparkles,
-  },
-  {
-    title: "Continuous Learning",
-    description: "Weekly tech talks and learning sessions",
-    icon: BookOpen,
-  },
-  {
-    title: "Collaborative Environment",
-    description: "Open-door policy and team-driven culture",
-    icon: Users,
-  },
-  {
-    title: "Growth Mindset",
-    description: "Clear career progression paths",
+    title: "Career Growth",
+    description: "Clear pathways for professional advancement",
     icon: TrendingUp,
+  },
+  {
+    title: "Learning Budget",
+    description: "Annual stipend for courses and conferences",
+    icon: Award,
+  },
+  {
+    title: "Team Events",
+    description: "Regular outings, hackathons, and celebrations",
+    icon: Heart,
   },
 ];
 
 // Values
 const values = [
   {
-    title: "Customer First",
-    description: "We're obsessed with client success",
-    icon: Heart,
+    title: "Innovation First",
+    description: "We encourage creative problem-solving and new ideas",
+    icon: Sparkles,
   },
   {
-    title: "Excellence",
-    description: "We deliver high-quality solutions",
-    icon: Award,
-  },
-  {
-    title: "Integrity",
-    description: "Honest and transparent in all dealings",
-    icon: Shield,
-  },
-  {
-    title: "Teamwork",
-    description: "Collaboration over competition",
+    title: "Collaboration",
+    description: "Great things happen when we work together as one team",
     icon: Users,
+  },
+  {
+    title: "Continuous Learning",
+    description: "We invest in your growth and skill development",
+    icon: BookOpen,
+  },
+  {
+    title: "Quality Excellence",
+    description: "We take pride in writing clean, scalable code",
+    icon: Award,
   },
 ];
 
-export default function CareersPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    position: "",
-    experience: "",
-    message: "",
-    resume: null as File | null,
-  });
+// Culture Points
+const culturePoints = [
+  {
+    title: "Work-Life Harmony",
+    description: "We believe in sustainable pace and respecting personal time",
+    icon: CoffeeIcon,
+  },
+  {
+    title: "Modern Workspace",
+    description: "Ergonomic setup with the latest hardware and software",
+    icon: Home,
+  },
+  {
+    title: "Annual Retreats",
+    description: "Team bonding trips and offsite strategy sessions",
+    icon: Plane,
+  },
+  {
+    title: "Inclusive Culture",
+    description: "A welcoming environment where every voice is heard",
+    icon: HeartHandshake,
+  },
+];
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+export const metadata = {
+  title: "Careers at Lars Tech Solutions | Join Our Team",
+  description:
+    "Explore open career opportunities at Lars Tech Solutions. We are hiring Senior Full Stack Developers, ERP Engineers, and Designers in Najibabad, UP.",
+};
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setFormData({ ...formData, resume: e.target.files[0] });
-    }
-  };
-
-  const handleApply = (jobTitle: string) => {
-    setFormData({ ...formData, position: jobTitle });
-    document
-      .getElementById("application-form")
-      ?.scrollIntoView({ behavior: "smooth" });
-  };
+export default async function CareersPage() {
+  const jobOpenings = await getJobs();
 
   return (
     <main className="min-h-screen overflow-x-hidden">
@@ -245,6 +220,112 @@ export default function CareersPage() {
         </div>
       </section>
 
+      {/* Current Openings Section */}
+      <section id="openings" className="py-20 relative z-0">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
+              Join Us
+            </Badge>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+              Current Openings
+            </h2>
+            <p className="text-muted-foreground">
+              Find your perfect role and help us build amazing software solutions
+            </p>
+          </div>
+
+          <div className="space-y-4 max-w-4xl mx-auto">
+            {jobOpenings.map((job) => (
+              <Card
+                key={job.slug}
+                className="hover:shadow-lg transition-all duration-300 bg-background/80 backdrop-blur-sm hover:border-primary/40"
+              >
+                <CardContent className="p-6">
+                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2 flex-wrap">
+                        <h3 className="font-bold text-xl">{job.title}</h3>
+                        <Badge variant="secondary">{job.department}</Badge>
+                        <Badge variant="outline">{job.type}</Badge>
+                      </div>
+
+                      <div className="grid sm:grid-cols-3 gap-3 mt-3">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <MapPin className="w-4 h-4 text-primary" />
+                          {job.location}
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Clock className="w-4 h-4 text-primary" />
+                          Experience: {job.experience}
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <DollarSign className="w-4 h-4 text-primary" />
+                          {job.salary}
+                        </div>
+                      </div>
+
+                      <p className="text-muted-foreground mt-4 text-sm leading-relaxed">
+                        {job.description}
+                      </p>
+
+                      {job.requirements && job.requirements.length > 0 && (
+                        <div className="mt-4">
+                          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                            Key Requirements:
+                          </div>
+                          <ul className="grid md:grid-cols-2 gap-2">
+                            {job.requirements.slice(0, 3).map((req, idx) => (
+                              <li
+                                key={idx}
+                                className="flex items-center gap-2 text-xs"
+                              >
+                                <CheckCircle2 className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                                <span className="text-muted-foreground">{req}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row lg:flex-col gap-2 pt-2 lg:pt-0">
+                      <Link href={`/careers/${job.slug}`}>
+                        <Button variant="outline" className="w-full whitespace-nowrap">
+                          View Details
+                        </Button>
+                      </Link>
+                      <Link href={`/careers/${job.slug}/apply`}>
+                        <Button className="w-full whitespace-nowrap group">
+                          Apply Now
+                          <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Primary AdSense Placement on Careers Page */}
+          <AdBanner slot={adsConfig.slots.careersFeed} className="my-12 max-w-4xl" />
+
+          {/* General Application CTA */}
+          <div className="mt-8 text-center max-w-md mx-auto p-6 rounded-2xl border bg-card/60 backdrop-blur-sm">
+            <h3 className="font-semibold text-base mb-1">Don't see your specific role?</h3>
+            <p className="text-xs text-muted-foreground mb-4">
+              We're always looking for brilliant developers, designers, and innovators.
+            </p>
+            <Link href="/careers/apply">
+              <Button variant="secondary" size="sm">
+                Submit General Application
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Culture Section */}
       <section id="culture" className="py-20 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -256,8 +337,7 @@ export default function CareersPage() {
               Life at Lars Tech
             </h2>
             <p className="text-muted-foreground">
-              We've built an environment where creativity thrives and ideas
-              become reality
+              We've built an environment where creativity thrives and ideas become reality
             </p>
           </div>
 
@@ -368,281 +448,6 @@ export default function CareersPage() {
                 </Card>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Open Positions Section */}
-      <section id="openings" className="py-20 relative z-0">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
-              Join Us
-            </Badge>
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-              Current Openings
-            </h2>
-            <p className="text-muted-foreground">
-              Find your perfect role and help us build amazing software
-              solutions
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            {jobOpenings.map((job) => (
-              <div key={job.id}>
-                <Card className="hover:shadow-lg transition-all duration-300 bg-background/80 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                            <job.icon className="w-5 h-5 text-primary" />
-                          </div>
-                          <div>
-                            <h3 className="font-bold text-xl">{job.title}</h3>
-                            <Badge variant="secondary" className="mt-1">
-                              {job.department}
-                            </Badge>
-                          </div>
-                        </div>
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <MapPin className="w-4 h-4" />
-                            {job.location}
-                          </div>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Briefcase className="w-4 h-4" />
-                            {job.type}
-                          </div>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <Clock className="w-4 h-4" />
-                            {job.experience}
-                          </div>
-                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <DollarSign className="w-4 h-4" />
-                            {job.salary}
-                          </div>
-                        </div>
-                        <p className="text-muted-foreground mt-4">
-                          {job.description}
-                        </p>
-                        <div className="mt-4">
-                          <div className="text-sm font-semibold mb-2">
-                            Key Requirements:
-                          </div>
-                          <ul className="grid md:grid-cols-2 gap-2">
-                            {job.requirements.slice(0, 3).map((req, idx) => (
-                              <li
-                                key={idx}
-                                className="flex items-center gap-2 text-sm"
-                              >
-                                <CheckCircle2 className="w-3 h-3 text-primary flex-shrink-0" />
-                                <span className="text-muted-foreground">
-                                  {req}
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <Button
-                          onClick={() => handleApply(job.title)}
-                          className="whitespace-nowrap"
-                        >
-                          Apply Now
-                          <ArrowRight className="ml-2 w-4 h-4" />
-                        </Button>
-                        <div className="text-xs text-muted-foreground text-center">
-                          {job.posted}
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Application Form Section */}
-      <section id="application-form" className="py-20 relative z-0">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
-                Apply Now
-              </Badge>
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-                Ready to Join?
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                Fill out the application form and attach your resume. Our
-                recruitment team will review your application and get back to
-                you within 5-7 business days.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-semibold">Email Your Resume</div>
-                    <div className="text-sm text-muted-foreground">
-                      careers@larstech.in
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-semibold">Call Us</div>
-                    <div className="text-sm text-muted-foreground">
-                      +91 8273553959 (HR Department)
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <Card className="bg-background/80 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle>Application Form</CardTitle>
-                  <CardDescription>
-                    Fill in your details and attach your resume
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form className="space-y-4">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Full Name *</Label>
-                        <Input
-                          id="name"
-                          name="name"
-                          placeholder="John Doe"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email Address *</Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          placeholder="john@example.com"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="phone">Phone Number *</Label>
-                        <Input
-                          id="phone"
-                          name="phone"
-                          placeholder="+91 82735 53959"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="experience">Years of Experience</Label>
-                        <Input
-                          id="experience"
-                          name="experience"
-                          placeholder="3-5 years"
-                          value={formData.experience}
-                          onChange={handleInputChange}
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="position">Position Applying For *</Label>
-                      <Input
-                        id="position"
-                        name="position"
-                        placeholder="Select a position"
-                        value={formData.position}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Cover Letter / Message</Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        placeholder="Tell us why you'd be a great fit..."
-                        rows={4}
-                        value={formData.message}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="resume">Upload Resume *</Label>
-                      <Input
-                        id="resume"
-                        name="resume"
-                        type="file"
-                        accept=".pdf,.doc,.docx"
-                        onChange={handleFileChange}
-                        required
-                      />
-                      <p className="text-xs text-muted-foreground">
-                        PDF, DOC, DOCX (Max 5MB)
-                      </p>
-                    </div>
-                    <Button type="submit" className="w-full group">
-                      Submit Application
-                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Join Us Section - CTA */}
-      <section className="py-20 bg-primary relative z-0">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-primary-foreground mb-4">
-              Start Your Journey With Us
-            </h2>
-            <p className="text-lg text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-              Be part of a growing company where your ideas matter and your
-              growth is our priority
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="#openings">
-                <Button size="lg" variant="secondary" className="group">
-                  View Open Positions
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground/10"
-                >
-                  Contact HR
-                </Button>
-              </Link>
-            </div>
           </div>
         </div>
       </section>
