@@ -52,6 +52,8 @@ import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
+import { AdBanner } from "@/components/common/ad-banner";
+import { adsConfig } from "@/config/ads";
 
 // Custom icon components (keep as is)
 const BarChart3 = ({ className }: { className?: string }) => (
@@ -316,6 +318,11 @@ export default function ServiceDetailPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Top Service Ad Banner */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-8">
+          <AdBanner slot={adsConfig.slots.primaryBanner} className="my-2 max-w-5xl" />
         </div>
       </section>
 
@@ -627,6 +634,9 @@ export default function ServiceDetailPage() {
               </div>
             ))}
           </div>
+
+          {/* Pre-CTA Service Ad Banner */}
+          <AdBanner slot={adsConfig.slots.primaryBanner} className="my-12 max-w-5xl" />
         </div>
       </section>
 

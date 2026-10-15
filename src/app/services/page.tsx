@@ -37,6 +37,8 @@ import { cn } from "@/lib/utils";
 
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
 import { servicesData } from "@/data/services";
+import { AdBanner } from "@/components/common/ad-banner";
+import { adsConfig } from "@/config/ads";
 
 // Map servicesData to format expected by services/page.tsx tabs and cards
 const services = servicesData.map((s) => ({
@@ -245,6 +247,9 @@ export default function ServicesPage() {
               </div>
             ))}
           </div>
+
+          {/* In-feed Ad Banner */}
+          <AdBanner slot={adsConfig.slots.primaryBanner} className="my-12 max-w-5xl" />
         </div>
       </section>
 
@@ -465,6 +470,9 @@ export default function ServicesPage() {
               </div>
             ))}
           </div>
+
+          {/* Pre-CTA Ad Banner */}
+          <AdBanner slot={adsConfig.slots.primaryBanner} className="my-12 max-w-5xl" />
         </div>
       </section>
 
