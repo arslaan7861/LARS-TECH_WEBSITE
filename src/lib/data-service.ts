@@ -128,8 +128,8 @@ export async function getBlogPosts(includeUnpublished = false): Promise<PublicBl
           content: p.content,
           category: p.category as any,
           author: {
-            name: p.author?.name || "Lars Tech Research Team",
-            role: p.author?.role || "Solutions Architecture",
+            name: p.author?.name || "Arslaan Ansari",
+            role: p.author?.role || "Founder & Lead Architect",
             avatar: p.author?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop",
           },
           tags: p.tags || [],
@@ -162,8 +162,8 @@ export async function getBlogPostBySlug(slug: string): Promise<PublicBlogPost | 
           content: post.content,
           category: post.category as any,
           author: {
-            name: post.author?.name || "Lars Tech Research Team",
-            role: post.author?.role || "Solutions Architecture",
+            name: post.author?.name || "Arslaan Ansari",
+            role: post.author?.role || "Founder & Lead Architect",
             avatar: post.author?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop",
           },
           tags: post.tags || [],

@@ -36,8 +36,8 @@ const BlogPostSchema: Schema<IBlogPost> = new Schema(
       index: true,
     },
     author: {
-      name: { type: String, required: true, default: "Lars Tech Research Team" },
-      role: { type: String, required: true, default: "Solutions Architecture" },
+      name: { type: String, required: true, default: "Arslaan Ansari" },
+      role: { type: String, required: true, default: "Founder & Lead Architect" },
       avatar: { type: String, default: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop" },
     },
     tags: [{ type: String }],

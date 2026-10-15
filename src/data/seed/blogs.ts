@@ -27,7 +27,7 @@ export const seedBlogPosts: SeedBlogPost[] = [
       "A comprehensive analysis of how integrated School ERP platforms streamline fee management, attendance synchronization, grade automation, and parent communication in modern K-12 institutions.",
     category: "Products & ERP",
     author: {
-      name: "Amit Kumar",
+      name: "Arslaan Ansari",
       role: "Founder & Product Lead",
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
     },
@@ -121,8 +121,8 @@ Transitioning to an integrated School ERP is not merely an IT upgrade; it is an 
       "A technical deep-dive into building autonomous multi-agent systems, tool calling frameworks, contextual memory models, and enterprise safety guardrails in 2026.",
     category: "AI & Emerging Tech",
     author: {
-      name: "Priya Sharma",
-      role: "Technical Director",
+      name: "Arslaan Ansari",
+      role: "Founder & Lead Architect",
       avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
     },
     tags: ["Agentic AI", "LLMs", "Artificial Intelligence", "System Architecture", "Python"],
@@ -202,8 +202,8 @@ At Lars Tech Solutions, we incorporate agentic intelligence directly into our cu
       "Should your business host open-weights models like Llama 3 on private servers or rely on cloud APIs like OpenAI and Anthropic? Here is the definitive decision matrix.",
     category: "AI & Emerging Tech",
     author: {
-      name: "Priya Sharma",
-      role: "Technical Director",
+      name: "Arslaan Ansari",
+      role: "Founder & Lead Architect",
       avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
     },
     tags: ["Open Source AI", "Local LLMs", "Cloud Architecture", "Privacy", "Cost Optimization"],
@@ -264,7 +264,7 @@ This hybrid pattern delivers **99.9% data isolation**, reduces cloud API expense
       "Why growing mid-market enterprises frequently outgrow packaged generic software and how bespoke architecture drives competitive differentiation.",
     category: "Products & ERP",
     author: {
-      name: "Amit Kumar",
+      name: "Arslaan Ansari",
       role: "Founder & Product Lead",
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
     },
@@ -317,8 +317,8 @@ At Lars Tech Solutions, we specialize in building custom, enterprise-grade softw
       "How multi-modal vision models and transformer OCR pipelines automate physical document intake, invoices, and examination grading.",
     category: "AI & Emerging Tech",
     author: {
-      name: "Priya Sharma",
-      role: "Technical Director",
+      name: "Arslaan Ansari",
+      role: "Founder & Lead Architect",
       avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
     },
     tags: ["Computer Vision", "OCR", "Deep Learning", "ERP Automation"],
