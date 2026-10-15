@@ -179,6 +179,12 @@ export default function RootLayout({
             __html: JSON.stringify(organizationSchema),
           }}
         />
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7964008538861413"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
 
         {/* <script
           src="https://api.dolfin360.com/public/sdk/tracking.js"
