@@ -27,57 +27,46 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+import { siteConfig } from "@/config/site";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://larstech.in"),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default:
-      "Lars Tech Solutions | Custom Software Development & School ERP System",
-    template: "%s | Lars Tech Solutions",
+    default: `${siteConfig.name} | Custom Software Development & School ERP System`,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "Modern software development company delivering scalable, high-quality digital solutions. Specialized in custom software, web applications, SaaS products, and School ERP systems.",
-  keywords: [
-    "software development",
-    "custom software",
-    "ERP system",
-    "school management system",
-    "web development",
-    "SaaS solutions",
-    "business automation",
-    "Lars Tech",
-    "Najibabad software company",
-  ],
+  description: siteConfig.description,
+  keywords: [...siteConfig.keywords],
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
-  authors: [{ name: "Lars Tech Solutions", url: "https://larstech.in" }],
-  creator: "Lars Tech Solutions",
-  publisher: "Lars Tech Solutions",
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://larstech.in",
-    siteName: "Lars Tech Solutions",
-    title: "Lars Tech Solutions - Transform Your Business with Custom Software",
-    description:
-      "Tailor-made software solutions that solve real-world operational challenges and drive business growth.",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: `${siteConfig.name} - Transform Your Business with Custom Software`,
+    description: siteConfig.description,
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Lars Tech Solutions - Custom Software Development",
+        alt: `${siteConfig.name} - Custom Software Development`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lars Tech Solutions - Custom Software Development",
-    description: "Transform your business with tailor-made software solutions",
+    title: `${siteConfig.name} - Custom Software Development`,
+    description: siteConfig.description,
     images: ["/twitter-image.jpg"],
-    creator: "@larstech",
+    creator: siteConfig.socials.twitterHandle,
   },
   robots: {
     index: true,
@@ -94,7 +83,7 @@ export const metadata: Metadata = {
     google: "your-google-verification-code",
   },
   alternates: {
-    canonical: "https://larstech.in",
+    canonical: siteConfig.url,
   },
 };
 
@@ -116,46 +105,44 @@ export default function RootLayout({
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Lars Tech Solutions",
-    url: "https://larstech.in",
-    logo: "https://larstech.in/logo-full.png",
-    description:
-      "Modern software development company delivering scalable, high-quality digital solutions. Specialized in custom software, web applications, SaaS products, and School ERP systems.",
-    foundingDate: "2020",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    logo: `${siteConfig.url}/logo-full.png`,
+    description: siteConfig.description,
+    foundingDate: siteConfig.foundingYear,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Najibabad",
-      addressRegion: "Uttar Pradesh",
-      addressCountry: "IN",
+      streetAddress: siteConfig.address.street,
+      addressRegion: siteConfig.address.region,
+      addressCountry: siteConfig.address.countryCode,
     },
     sameAs: [
-      "https://www.linkedin.com/company/lars-tech",
-      "https://twitter.com/larstech",
-      "https://www.instagram.com/larstech",
+      siteConfig.socials.linkedin,
+      siteConfig.socials.twitter,
+      siteConfig.socials.instagram,
     ],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Customer Support",
-      email: "contact@larstech.in",
+      email: siteConfig.contact.email,
     },
   };
 
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: "Lars Tech Solutions",
-    image: "https://larstech.in/logo-full.png",
-    description:
-      "Software development company in Najibabad providing custom software solutions and ERP systems",
+    name: siteConfig.name,
+    image: `${siteConfig.url}/logo-full.png`,
+    description: `${siteConfig.name} in ${siteConfig.address.city} providing custom software solutions and ERP systems`,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Najibabad",
-      addressRegion: "Uttar Pradesh",
-      postalCode: "246301",
-      addressCountry: "IN",
+      streetAddress: siteConfig.address.street,
+      addressRegion: siteConfig.address.region,
+      postalCode: siteConfig.address.postalCode,
+      addressCountry: siteConfig.address.countryCode,
     },
-    telephone: "+91-XXXXXXXXXX",
-    url: "https://larstech.in",
+    telephone: siteConfig.contact.phone,
+    url: siteConfig.url,
   };
 
   return (

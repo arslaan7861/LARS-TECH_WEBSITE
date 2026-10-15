@@ -54,112 +54,17 @@ const staggerContainer = {
 
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
 
-// Company values
-const values = [
-  {
-    title: "Innovation First",
-    description:
-      "We embrace cutting-edge technologies to deliver future-ready solutions.",
-    icon: Sparkles,
-  },
-  {
-    title: "Client Success",
-    description:
-      "Your growth is our success. We're committed to exceeding expectations.",
-    icon: Heart,
-  },
-  {
-    title: "Quality Excellence",
-    description:
-      "We never compromise on code quality, security, or performance.",
-    icon: Award,
-  },
-  {
-    title: "Transparency",
-    description: "Open communication and honest partnerships built on trust.",
-    icon: Eye,
-  },
-];
-
-// Milestones
-const milestones = [
-  {
-    year: "2020",
-    title: "Company Founded",
-    description:
-      "Started with a vision to transform businesses through technology.",
-    icon: Rocket,
-  },
-  {
-    year: "2021",
-    title: "First Major Client",
-    description:
-      "Onboarded our first enterprise client for custom ERP solution.",
-    icon: Briefcase,
-  },
-  {
-    year: "2022",
-    title: "School ERP Launch",
-    description: "Launched flagship School ERP system, serving 50+ schools.",
-    icon: Target,
-  },
-  {
-    year: "2023",
-    title: "Team Expansion",
-    description: "Grew to 25+ skilled developers and designers.",
-    icon: Users,
-  },
-  {
-    year: "2024",
-    title: "100+ Projects",
-    description: "Successfully delivered 100+ projects across India.",
-    icon: Trophy,
-  },
-  {
-    year: "2025",
-    title: "Global Reach",
-    description: "Expanded services to international clients.",
-    icon: Globe2,
-  },
-];
-
-// Team members
-const team = [
-  {
-    name: "Amit Kumar",
-    role: "Founder & CEO",
-    bio: "15+ years in software development, ex-Microsoft",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
-  },
-  {
-    name: "Priya Sharma",
-    role: "Technical Director",
-    bio: "Full-stack expert with passion for scalable architecture",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
-  },
-  {
-    name: "Rajesh Verma",
-    role: "Head of Operations",
-    bio: "Ensuring smooth delivery and client satisfaction",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
-  },
-  {
-    name: "Neha Gupta",
-    role: "Lead UI/UX Designer",
-    bio: "Creating beautiful, intuitive user experiences",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
-  },
-];
+import {
+  companyValues as values,
+  milestones,
+  teamMembers as team,
+} from "@/data/company";
 
 // Stats
 const stats = [
   { label: "Projects Completed", value: 150, suffix: "+", icon: Code },
   { label: "Happy Clients", value: 120, suffix: "+", icon: Users },
-  { label: "Team Members", value: 25, suffix: "+", icon: Users },
+  { label: "Team Members", value: 35, suffix: "+", icon: Users },
   { label: "Years Experience", value: 6, suffix: "+", icon: Clock },
   { label: "Client Retention", value: 95, suffix: "%", icon: Heart },
   { label: "Schools Served", value: 80, suffix: "+", icon: Target },

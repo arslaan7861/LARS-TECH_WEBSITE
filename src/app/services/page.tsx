@@ -54,211 +54,23 @@ const staggerContainer = {
 
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
 
-// Services data
-const services = [
-  {
-    id: "custom-software",
-    title: "Custom Software Development",
-    slug: "custom-software-development",
-    description:
-      "Tailor-made software solutions built specifically for your unique business needs and challenges.",
-    fullDescription:
-      "We design and develop custom software that addresses your specific operational challenges. Our team works closely with you to understand your requirements and deliver a solution that perfectly fits your workflow.",
-    icon: Code,
-    features: [
-      "Requirement analysis & planning",
-      "Custom architecture design",
-      "Agile development methodology",
-      "Quality assurance & testing",
-      "Deployment & maintenance",
-      "Scalable & secure solutions",
-    ],
-    benefits: [
-      "Perfect fit for your business processes",
-      "Competitive advantage with unique features",
-      "Full ownership of source code",
-      "Scalable as your business grows",
-      "Dedicated support team",
-    ],
-    technologies: [
-      "React",
-      "Node.js",
-      "Python",
-      "Java",
-      "PostgreSQL",
-      "MongoDB",
-    ],
-    pricing: "Project-based",
-    delivery: "4-12 weeks",
-    color: "from-blue-500 to-cyan-500",
-  },
-  {
-    id: "web-apps",
-    title: "Web Application Development",
-    slug: "web-application-development",
-    description:
-      "Modern, responsive web applications that deliver exceptional user experiences across all devices.",
-    fullDescription:
-      "We build fast, responsive, and SEO-friendly web applications using the latest technologies. Our focus is on creating intuitive interfaces that engage users and drive conversions.",
-    icon: LayoutDashboard,
-    features: [
-      "Responsive design",
-      "Progressive Web Apps (PWA)",
-      "Single Page Applications (SPA)",
-      "API integration",
-      "Performance optimization",
-      "Cross-browser compatibility",
-    ],
-    benefits: [
-      "Reach customers on any device",
-      "Improved user engagement",
-      "Better search engine rankings",
-      "Reduced development costs",
-      "Faster time to market",
-    ],
-    technologies: [
-      "React",
-      "Next.js",
-      "Vue.js",
-      "Angular",
-      "Tailwind CSS",
-      "TypeScript",
-    ],
-    pricing: "Project-based",
-    delivery: "6-16 weeks",
-    color: "from-purple-500 to-pink-500",
-  },
-  {
-    id: "saas",
-    title: "SaaS Product Development",
-    slug: "saas-product-development",
-    description:
-      "End-to-end SaaS platform development with multi-tenancy, subscription management, and scalability.",
-    fullDescription:
-      "Transform your idea into a successful SaaS product. We handle everything from architecture design to deployment, including payment integration and subscription management.",
-    icon: Cloud,
-    features: [
-      "Multi-tenant architecture",
-      "Subscription management",
-      "Payment gateway integration",
-      "User authentication & authorization",
-      "Analytics dashboard",
-      "Automated scaling",
-    ],
-    benefits: [
-      "Recurring revenue model",
-      "Lower customer acquisition cost",
-      "Automatic updates for all users",
-      "Global scalability",
-      "Reduced infrastructure costs",
-    ],
-    technologies: ["AWS", "Azure", "Stripe", "React", "Node.js", "PostgreSQL"],
-    pricing: "Custom pricing",
-    delivery: "8-20 weeks",
-    color: "from-green-500 to-emerald-500",
-  },
-  {
-    id: "automation",
-    title: "Business Automation Systems",
-    slug: "business-automation",
-    description:
-      "Streamline your operations with intelligent automation solutions that reduce manual work and errors.",
-    fullDescription:
-      "Automate repetitive tasks and optimize your business processes with our custom automation solutions. Increase efficiency and reduce operational costs.",
-    icon: Database,
-    features: [
-      "Workflow automation",
-      "Process optimization",
-      "Data integration",
-      "Real-time monitoring",
-      "Custom rules engine",
-      "Reporting & analytics",
-    ],
-    benefits: [
-      "Reduce operational costs by up to 40%",
-      "Eliminate human errors",
-      "Faster processing times",
-      "Better resource utilization",
-      "Improved compliance",
-    ],
-    technologies: [
-      "Python",
-      "Node.js",
-      "RabbitMQ",
-      "Redis",
-      "Docker",
-      "Kubernetes",
-    ],
-    pricing: "Project-based",
-    delivery: "6-14 weeks",
-    color: "from-orange-500 to-red-500",
-  },
-  {
-    id: "erp",
-    title: "ERP & Management Systems",
-    slug: "erp-management-systems",
-    description:
-      "Complete business management solutions that integrate all your core processes into one system.",
-    fullDescription:
-      "Get a unified view of your business with our custom ERP solutions. Integrate finance, HR, inventory, and more into a single platform.",
-    icon: Briefcase,
-    features: [
-      "Centralized database",
-      "Module-based architecture",
-      "Real-time reporting",
-      "Inventory management",
-      "HR & payroll",
-      "Financial management",
-    ],
-    benefits: [
-      "Single source of truth for all data",
-      "Eliminate data silos",
-      "Better decision making",
-      "Improved productivity",
-      "Reduced IT costs",
-    ],
-    technologies: ["React", "Node.js", "PostgreSQL", "Redis", "Docker"],
-    pricing: "Enterprise pricing",
-    delivery: "12-24 weeks",
-    color: "from-indigo-500 to-purple-500",
-  },
-  {
-    id: "api",
-    title: "API Development & Integration",
-    slug: "api-development-integration",
-    description:
-      "Secure, scalable APIs that connect your systems and enable seamless data exchange.",
-    fullDescription:
-      "Build robust APIs that power your applications and enable seamless integration with third-party services. We follow industry best practices for security and performance.",
-    icon: Shield,
-    features: [
-      "RESTful APIs",
-      "GraphQL support",
-      "API security",
-      "Rate limiting",
-      "Comprehensive documentation",
-      "Monitoring & analytics",
-    ],
-    benefits: [
-      "Connect disparate systems",
-      "Enable third-party integrations",
-      "Improve system interoperability",
-      "Future-proof your architecture",
-      "Better developer experience",
-    ],
-    technologies: [
-      "Node.js",
-      "Python",
-      "GraphQL",
-      "Express",
-      "FastAPI",
-      "PostgreSQL",
-    ],
-    pricing: "Project-based",
-    delivery: "4-8 weeks",
-    color: "from-cyan-500 to-blue-500",
-  },
-];
+import { servicesData } from "@/data/services";
+
+// Map servicesData to format expected by services/page.tsx tabs and cards
+const services = servicesData.map((s) => ({
+  id: s.id,
+  title: s.title,
+  slug: s.slug,
+  description: s.description,
+  fullDescription: s.fullDescription,
+  icon: s.icon,
+  features: s.features.map((f) => f.title),
+  benefits: s.benefits.map((b) => b.title),
+  technologies: s.technologies.map((t) => t.name),
+  pricing: s.pricing,
+  delivery: s.delivery,
+  color: s.color,
+}));
 
 // Process steps
 const processSteps = [

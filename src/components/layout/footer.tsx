@@ -19,29 +19,32 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-// Social links with proper icons
+import { siteConfig } from "@/config/site";
+import { servicesData } from "@/data/services";
+
+// Social links
 const socialLinks = [
   {
     name: "Facebook",
-    href: "https://facebook.com/larstech",
+    href: siteConfig.socials.facebook,
     icon: Mail,
     color: "hover:bg-[#1877f2]",
   },
   {
     name: "Twitter",
-    href: "https://twitter.com/larstech",
+    href: siteConfig.socials.twitter,
     icon: Mail,
     color: "hover:bg-[#1da1f2]",
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/company/larstech",
+    href: siteConfig.socials.linkedin,
     icon: Mail,
     color: "hover:bg-[#0a66c2]",
   },
   {
     name: "GitHub",
-    href: "https://github.com/larstech",
+    href: siteConfig.socials.github,
     icon: Mail,
     color: "hover:bg-[#333]",
   },
@@ -51,36 +54,18 @@ const socialLinks = [
 const footerLinks = {
   company: {
     title: "Company",
-    links: [
-      { name: "About Us", href: "/about" },
-      { name: "Our Team", href: "/about#team" },
-      { name: "Careers", href: "/careers" },
-      { name: "Blog", href: "/blog" },
-    ],
+    links: siteConfig.footerLinks.company,
   },
   services: {
     title: "Services",
-    links: [
-      {
-        name: "Custom Software",
-        href: "/services/custom-software-development",
-      },
-      {
-        name: "Web Development",
-        href: "/services/web-application-development",
-      },
-      { name: "SaaS Products", href: "/services/saas-product-development" },
-      { name: "ERP Systems", href: "/services/erp-management-systems" },
-    ],
+    links: servicesData.slice(0, 4).map((s) => ({
+      name: s.title.replace(" Development", "").replace(" Systems", ""),
+      href: `/services/${s.slug}`,
+    })),
   },
   resources: {
     title: "Resources",
-    links: [
-      { name: "Documentation", href: "/docs" },
-      { name: "Support", href: "/support" },
-      { name: "Privacy Policy", href: "/privacy-policy" },
-      { name: "Terms of Service", href: "/terms" },
-    ],
+    links: siteConfig.footerLinks.resources,
   },
 };
 
@@ -212,7 +197,7 @@ export function Footer() {
               <div>
                 <div className="text-xs text-muted-foreground">Visit Us</div>
                 <span className="text-sm font-medium">
-                  Najibabad, Bijnor, Uttar Pradesh
+                  {siteConfig.address.display}
                 </span>
               </div>
             </motion.div>
@@ -229,10 +214,10 @@ export function Footer() {
               <div>
                 <div className="text-xs text-muted-foreground">Call Us</div>
                 <a
-                  href="tel:+918273553959"
+                  href={`tel:${siteConfig.contact.phoneRaw}`}
                   className="text-sm font-medium hover:text-primary transition-colors"
                 >
-                  +91 8273553959
+                  {siteConfig.contact.phone}
                 </a>
               </div>
             </motion.div>
@@ -249,10 +234,10 @@ export function Footer() {
               <div>
                 <div className="text-xs text-muted-foreground">Email Us</div>
                 <a
-                  href="mailto:support@larstech.in"
+                  href={`mailto:${siteConfig.contact.email}`}
                   className="text-sm font-medium hover:text-primary transition-colors"
                 >
-                  support@larstech.in
+                  {siteConfig.contact.email}
                 </a>
               </div>
             </motion.div>

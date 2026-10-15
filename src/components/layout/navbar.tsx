@@ -28,54 +28,17 @@ import Image from "next/image";
 import { toast } from "sonner";
 import { test } from "next/experimental/testmode/playwright";
 
-// Service items data
-const services = [
-  {
-    title: "Custom Software Development",
-    href: "/services/custom-software-development",
-    description: "Tailor-made solutions built for your unique business needs",
-    icon: Code,
-    color: "from-blue-500 to-cyan-500",
-    badge: "Most Popular",
-  },
-  {
-    title: "Web Application Development",
-    href: "/services/web-application-development",
-    description: "Modern, responsive web apps with exceptional UX",
-    icon: LayoutDashboard,
-    color: "from-purple-500 to-pink-500",
-  },
-  {
-    title: "SaaS Product Development",
-    href: "/services/saas-product-development",
-    description: "Scalable SaaS platforms with subscription management",
-    icon: Cloud,
-    color: "from-green-500 to-emerald-500",
-    badge: "Trending",
-  },
-  {
-    title: "Business Automation Systems",
-    href: "/services/business-automation",
-    description: "Streamline operations with intelligent automation",
-    icon: Database,
-    color: "from-orange-500 to-red-500",
-  },
-  {
-    title: "ERP & Management Systems",
-    href: "/services/erp-management-systems",
-    description: "Complete business management in one platform",
-    icon: Briefcase,
-    color: "from-indigo-500 to-purple-500",
-    badge: "Enterprise",
-  },
-  {
-    title: "API Development & Integration",
-    href: "/services/api-development-integration",
-    description: "Secure, scalable APIs for seamless integration",
-    icon: Shield,
-    color: "from-cyan-500 to-blue-500",
-  },
-];
+import { servicesData } from "@/data/services";
+
+// Map servicesData for navbar
+const services = servicesData.map((s) => ({
+  title: s.title,
+  href: `/services/${s.slug}`,
+  description: s.description,
+  icon: s.icon,
+  color: s.color,
+  badge: s.badge,
+}));
 
 // School ERP dropdown items - removed non-existent pages
 const schoolErpItems = [

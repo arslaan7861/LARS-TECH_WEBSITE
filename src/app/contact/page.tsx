@@ -57,80 +57,36 @@ const staggerContainer = {
 
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
 
-// Contact methods
-const contactMethods = [
-  {
-    title: "Phone",
-    details: "+91 8273553959",
-    icon: Phone,
-    href: "tel:+918273553959",
-    color: "bg-green-500/10 text-green-600",
-  },
-  {
-    title: "Email",
-    details: "support@larstech.in",
-    icon: Mail,
-    href: "mailto:support@larstech.in",
-    color: "bg-blue-500/10 text-blue-600",
-  },
-  {
-    title: "WhatsApp",
-    details: "+91 8273553959",
-    icon: MessageCircle,
-    href: "https://wa.me/918273553959",
-    color: "bg-emerald-500/10 text-emerald-600",
-  },
-  {
-    title: "Office",
-    details: "Najibabad, Bijnor, UP",
-    icon: MapPin,
-    href: "https://maps.google.com",
-    color: "bg-red-500/10 text-red-600",
-  },
-];
+import {
+  contactMethods,
+  businessHours,
+  serviceInquiryOptions as serviceOptions,
+} from "@/data/company";
+import { siteConfig } from "@/config/site";
 
-// Business hours
-const businessHours = [
-  { day: "Monday - Friday", hours: "9:00 AM - 6:00 PM" },
-  { day: "Saturday", hours: "10:00 AM - 4:00 PM" },
-  { day: "Sunday", hours: "Closed" },
-];
-
-// Service options for dropdown
-const serviceOptions = [
-  "Custom Software Development",
-  "Web Application Development",
-  "SaaS Product Development",
-  "Business Automation",
-  "ERP & Management Systems",
-  "API Development & Integration",
-  "School ERP System",
-  "Other",
-];
-
-// Social links
+// Social links from siteConfig
 const socialLinks = [
   {
     name: "Facebook",
-    href: "https://facebook.com/larstech",
+    href: siteConfig.socials.facebook,
     icon: Mail,
     color: "hover:bg-[#1877f2]",
   },
   {
     name: "Twitter",
-    href: "https://twitter.com/larstech",
+    href: siteConfig.socials.twitter,
     icon: Mail,
     color: "hover:bg-[#1da1f2]",
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/company/larstech",
+    href: siteConfig.socials.linkedin,
     icon: Mail,
     color: "hover:bg-[#0a66c2]",
   },
   {
     name: "GitHub",
-    href: "https://github.com/larstech",
+    href: siteConfig.socials.github,
     icon: Mail,
     color: "hover:bg-[#333]",
   },

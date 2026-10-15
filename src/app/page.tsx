@@ -71,101 +71,29 @@ const staggerContainer = {
   },
 };
 
-// Services data
-const services = [
-  {
-    title: "Custom Software Development",
-    description:
-      "Tailor-made solutions built specifically for your unique business needs.",
-    icon: Code,
-    href: "/services/custom-software-development",
-    color: "from-blue-600 to-cyan-600",
-    stat: "150+ Projects",
-  },
-  {
-    title: "Web Application Development",
-    description:
-      "Modern, responsive web apps that deliver exceptional user experiences.",
-    icon: LayoutDashboard,
-    href: "/services/web-application-development",
-    color: "from-purple-600 to-pink-600",
-    stat: "80+ Apps",
-  },
-  {
-    title: "SaaS Product Development",
-    description:
-      "End-to-end SaaS platforms with multi-tenancy and subscription management.",
-    icon: Cloud,
-    href: "/services/saas-product-development",
-    color: "from-green-600 to-emerald-600",
-    stat: "25+ Products",
-  },
-  {
-    title: "Business Automation",
-    description:
-      "Intelligent automation solutions that reduce manual work by up to 70%.",
-    icon: Database,
-    href: "/services/business-automation",
-    color: "from-orange-600 to-red-600",
-    stat: "500+ Processes",
-  },
-  {
-    title: "ERP Systems",
-    description:
-      "Complete business management solutions integrating all core processes.",
-    icon: Briefcase,
-    href: "/services/erp-management-systems",
-    color: "from-indigo-600 to-purple-600",
-    stat: "15+ Modules",
-  },
-  {
-    title: "API Integration",
-    description:
-      "Secure, scalable APIs enabling seamless data exchange between systems.",
-    icon: Shield,
-    href: "/services/api-development-integration",
-    color: "from-cyan-600 to-blue-600",
-    stat: "100+ APIs",
-  },
-];
+import { servicesData } from "@/data/services";
+import { allFeatures } from "@/data/school-erp";
+import { companyStats } from "@/data/company";
 
-// School ERP features
-const erpFeatures = [
-  {
-    title: "Attendance Management",
-    icon: UserCheck,
-    description: "Biometric integration & real-time tracking",
-  },
-  {
-    title: "Exams & Results",
-    icon: BookOpen,
-    description: "Online exams & instant results",
-  },
-  {
-    title: "Fee Management",
-    icon: CreditCard,
-    description: "Online collection & auto-receipts",
-  },
-  {
-    title: "Student Management",
-    icon: GraduationCap,
-    description: "Complete academic profiles",
-  },
-  {
-    title: "Teacher Management",
-    icon: Users,
-    description: "Staff records & payroll",
-  },
-  { title: "Bus Tracking", icon: Bus, description: "Real-time GPS tracking" },
-];
+// Services data from centralized config
+const services = servicesData.map((s) => ({
+  title: s.title,
+  description: s.description,
+  icon: s.icon,
+  href: `/services/${s.slug}`,
+  color: s.gradient,
+  stat: s.stat,
+}));
 
-// Stats
-const stats = [
-  { label: "Projects Completed", value: 150, suffix: "+", icon: Code },
-  { label: "Happy Clients", value: 120, suffix: "+", icon: Users },
-  { label: "Years Experience", value: 6, suffix: "+", icon: Clock },
-  { label: "Client Satisfaction", value: 98, suffix: "%", icon: Heart },
-];
+// School ERP features from centralized config
+const erpFeatures = allFeatures.slice(0, 6).map((f) => ({
+  title: f.title,
+  icon: f.icon,
+  description: f.description.slice(0, 40) + "...",
+}));
+
+// Stats from centralized config
+const stats = companyStats;
 
 // Testimonials
 const testimonials = [
