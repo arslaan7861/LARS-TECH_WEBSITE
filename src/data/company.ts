@@ -288,28 +288,21 @@ export const careerBenefits: CareerBenefit[] = [
 
 export const contactMethods: ContactMethod[] = [
   {
-    title: "Phone",
-    details: "+91 8273553959",
-    icon: Phone,
-    href: "tel:+918273553959",
-    color: "bg-green-500/10 text-green-600",
-  },
-  {
-    title: "Email",
+    title: "Email Support",
     details: "support@larstech.in",
     icon: Mail,
     href: "mailto:support@larstech.in",
     color: "bg-blue-500/10 text-blue-600",
   },
   {
-    title: "WhatsApp",
-    details: "+91 8273553959",
-    icon: MessageCircle,
-    href: "https://wa.me/918273553959",
-    color: "bg-emerald-500/10 text-emerald-600",
+    title: "Business Inquiries",
+    details: "contact@larstech.in",
+    icon: Mail,
+    href: "mailto:contact@larstech.in",
+    color: "bg-purple-500/10 text-purple-600",
   },
   {
-    title: "Office",
+    title: "Office Location",
     details: "Najibabad, Bijnor, UP",
     icon: MapPin,
     href: "https://maps.google.com",

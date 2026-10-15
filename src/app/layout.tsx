@@ -141,7 +141,6 @@ export default function RootLayout({
       postalCode: siteConfig.address.postalCode,
       addressCountry: siteConfig.address.countryCode,
     },
-    telephone: siteConfig.contact.phone,
     url: siteConfig.url,
   };
 

@@ -22,8 +22,6 @@ export const siteConfig = {
   contact: {
     email: "support@larstech.in",
     salesEmail: "contact@larstech.in",
-    phone: "+91 8273553959",
-    phoneRaw: "+918273553959",
     supportHours: "Monday - Saturday: 9:00 AM - 7:00 PM IST",
   },
   socials: {

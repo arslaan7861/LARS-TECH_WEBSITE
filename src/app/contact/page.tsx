@@ -187,7 +187,7 @@ export default function ContactPage() {
       {/* Contact Methods Grid */}
       <section className="py-12 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {contactMethods.map((method, index) => (
               <div key={index}>
                 <a
@@ -358,7 +358,7 @@ export default function ContactPage() {
                             <Input
                               id="phone"
                               name="phone"
-                              placeholder="+91 82735 53959"
+                              placeholder="+91 98765 43210"
                               className="pl-9"
                               value={formData.phone}
                               onChange={handleChange}
