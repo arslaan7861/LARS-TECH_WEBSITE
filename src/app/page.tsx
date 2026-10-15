@@ -1,14 +1,8 @@
 // src/app/page.tsx
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  AnimatePresence,
-} from "framer-motion";
 import {
   ArrowRight,
   CheckCircle2,
@@ -43,33 +37,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
-
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
-};
-
-const fadeInRight = {
-  hidden: { opacity: 0, x: 50 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
 
 import { servicesData } from "@/data/services";
 import { allFeatures } from "@/data/school-erp";
@@ -126,41 +93,9 @@ const testimonials = [
   },
 ];
 
-// Custom hook for scroll reveal
-const useInView = (ref: React.RefObject<HTMLElement | null>) => {
-  const [isInView, setIsInView] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 },
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [ref]);
-
-  return isInView;
-};
-
 export default function HomePage() {
   const [hoveredService, setHoveredService] = useState<number | null>(null);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -171,6 +106,7 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen overflow-x-hidden">
+
       {/* Consistent Background Layer - Applied to all sections */}
       <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-primary/5 -z-20" />
       <div className="fixed inset-0 bg-grid-pattern opacity-[0.02] -z-20" />
@@ -213,30 +149,19 @@ export default function HomePage() {
       </div>
 
       {/* Hero Section */}
-      <section
-        ref={heroRef}
-        className="relative pt-20 pb-32 lg:pt-32 lg:pb-40 z-0"
-      >
+      <section className="relative pt-20 pb-32 lg:pt-32 lg:pb-40 z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={staggerContainer}
-              className="text-center lg:text-left"
-            >
-              <motion.div variants={fadeInUp}>
+            <div className="text-center lg:text-left">
+              <div>
                 <Badge className="mb-6 bg-primary/10 text-primary hover:bg-primary/20 transition-all duration-300 px-4 py-1.5 text-sm backdrop-blur-sm">
                   <Sparkles className="w-3 h-3 mr-1 inline" />
                   India's Trusted Software Partner
                 </Badge>
-              </motion.div>
+              </div>
 
-              <motion.h1
-                variants={fadeInUp}
-                className="text-4xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight"
-              >
+              <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight">
                 <span className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                   Build Scalable Software
                 </span>
@@ -244,21 +169,15 @@ export default function HomePage() {
                 <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
                   That Drives Growth
                 </span>
-              </motion.h1>
+              </h1>
 
-              <motion.p
-                variants={fadeInUp}
-                className="text-lg lg:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
-              >
+              <p className="text-lg lg:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
                 Lars Tech Solutions delivers custom software, web applications,
                 and ERP systems that help businesses automate, scale, and grow
                 efficiently.
-              </motion.p>
+              </p>
 
-              <motion.div
-                variants={fadeInUp}
-                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10"
-              >
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
                 <Link href="/contact">
                   <Button
                     size="lg"
@@ -278,17 +197,13 @@ export default function HomePage() {
                     Watch Demo
                   </Button>
                 </Link>
-              </motion.div>
+              </div>
 
-              <motion.div
-                variants={fadeInUp}
-                className="grid grid-cols-2 sm:grid-cols-4 gap-4 lg:gap-6"
-              >
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 lg:gap-6">
                 {stats.map((stat, index) => (
-                  <motion.div
+                  <div
                     key={index}
-                    className="text-center p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-all duration-300 group cursor-pointer backdrop-blur-sm"
-                    whileHover={{ y: -5 }}
+                    className="text-center p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-all duration-300 group cursor-pointer backdrop-blur-sm hover:-translate-y-1"
                   >
                     <div className="text-2xl lg:text-3xl font-bold text-primary mb-1">
                       {stat.value}
@@ -297,18 +212,13 @@ export default function HomePage() {
                     <div className="text-xs text-muted-foreground group-hover:text-foreground transition-colors">
                       {stat.label}
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* Right Content - Hero Image */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="relative"
-            >
+            <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent z-10" />
                 <img
@@ -318,13 +228,7 @@ export default function HomePage() {
                 />
               </div>
 
-              <motion.div
-                className="absolute -bottom-5 -left-5 bg-background/90 backdrop-blur-sm rounded-xl shadow-xl p-3 border z-20"
-                initial={{ x: -20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                whileHover={{ y: -5 }}
-              >
+              <div className="absolute -bottom-5 -left-5 bg-background/90 backdrop-blur-sm rounded-xl shadow-xl p-3 border z-20 hover:-translate-y-1 transition-transform duration-200">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
                     <Star className="w-4 h-4 text-primary fill-primary" />
@@ -336,15 +240,9 @@ export default function HomePage() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                className="absolute -top-5 -right-5 bg-background/90 backdrop-blur-sm rounded-xl shadow-xl p-2 border z-20"
-                initial={{ x: 20, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.7, duration: 0.5 }}
-                whileHover={{ y: -5 }}
-              >
+              <div className="absolute -top-5 -right-5 bg-background/90 backdrop-blur-sm rounded-xl shadow-xl p-2 border z-20 hover:-translate-y-1 transition-transform duration-200">
                 <div className="flex items-center gap-2">
                   <div className="w-6 h-6 bg-green-500/10 rounded-lg flex items-center justify-center">
                     <CheckCircle2 className="w-3 h-3 text-green-500" />
@@ -353,8 +251,8 @@ export default function HomePage() {
                     Trusted by 120+ companies
                   </span>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -374,13 +272,12 @@ export default function HomePage() {
               "DataFlow",
               "NextGen",
             ].map((company, i) => (
-              <motion.span
+              <span
                 key={i}
-                className="text-lg font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                whileHover={{ scale: 1.05 }}
+                className="text-lg font-semibold text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-105 cursor-pointer"
               >
                 {company}
-              </motion.span>
+              </span>
             ))}
           </div>
         </div>
@@ -389,14 +286,8 @@ export default function HomePage() {
       {/* Services Section */}
       <section className="py-24 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-            className="text-center max-w-2xl mx-auto mb-16"
-          >
-            <motion.div variants={fadeInUp}>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 What We Do
               </Badge>
@@ -406,22 +297,18 @@ export default function HomePage() {
               <p className="text-muted-foreground text-lg">
                 End-to-end development services tailored to your business needs
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                onHoverStart={() => setHoveredService(index)}
-                onHoverEnd={() => setHoveredService(null)}
+                onMouseEnter={() => setHoveredService(index)}
+                onMouseLeave={() => setHoveredService(null)}
               >
                 <Link href={service.href}>
-                  <Card className="group h-full hover:shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer overflow-hidden relative bg-background/80 backdrop-blur-sm">
+                  <Card className="group h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer overflow-hidden relative bg-background/80 backdrop-blur-sm">
                     <CardContent className="p-6 relative z-10">
                       <div
                         className={cn(
@@ -448,7 +335,7 @@ export default function HomePage() {
                     </CardContent>
                   </Card>
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -458,13 +345,8 @@ export default function HomePage() {
       <section className="py-24 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-            >
-              <motion.div variants={fadeInLeft}>
+            <div>
+              <div>
                 <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                   Flagship Product
                 </Badge>
@@ -477,12 +359,9 @@ export default function HomePage() {
                   comprehensive School ERP System. From attendance to fee
                   management, we've got you covered.
                 </p>
-              </motion.div>
+              </div>
 
-              <motion.div
-                variants={fadeInLeft}
-                className="grid sm:grid-cols-2 gap-4 mb-10"
-              >
+              <div className="grid sm:grid-cols-2 gap-4 mb-10">
                 {erpFeatures.map((feature, index) => (
                   <div
                     key={index}
@@ -499,12 +378,9 @@ export default function HomePage() {
                     </div>
                   </div>
                 ))}
-              </motion.div>
+              </div>
 
-              <motion.div
-                variants={fadeInLeft}
-                className="flex flex-wrap gap-4"
-              >
+              <div className="flex flex-wrap gap-4">
                 <Link href="/school-erp">
                   <Button size="lg" className="rounded-xl group">
                     Explore ERP
@@ -516,16 +392,10 @@ export default function HomePage() {
                     Request Demo
                   </Button>
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInRight}
-              className="relative"
-            >
+            <div className="relative">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl blur-2xl" />
                 <div className="relative bg-gradient-to-br from-primary/5 to-transparent rounded-2xl p-4">
@@ -536,10 +406,7 @@ export default function HomePage() {
                   />
                 </div>
 
-                <motion.div
-                  className="absolute -top-4 -left-4 bg-background/90 backdrop-blur-sm rounded-xl shadow-lg p-3 border"
-                  whileHover={{ y: -5, scale: 1.05 }}
-                >
+                <div className="absolute -top-4 -left-4 bg-background/90 backdrop-blur-sm rounded-xl shadow-lg p-3 border hover:-translate-y-1 transition-transform">
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center">
                       <TrendingUp className="w-4 h-4 text-green-500" />
@@ -551,12 +418,9 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  className="absolute -bottom-4 -right-4 bg-background/90 backdrop-blur-sm rounded-xl shadow-lg p-3 border"
-                  whileHover={{ y: -5, scale: 1.05 }}
-                >
+                <div className="absolute -bottom-4 -right-4 bg-background/90 backdrop-blur-sm rounded-xl shadow-lg p-3 border hover:-translate-y-1 transition-transform">
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center">
                       <Users className="w-4 h-4 text-blue-500" />
@@ -568,9 +432,9 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -578,14 +442,8 @@ export default function HomePage() {
       {/* Why Choose Us Section */}
       <section className="py-24 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="text-center max-w-2xl mx-auto mb-16"
-          >
-            <motion.div variants={fadeInUp}>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 Why Choose Us
               </Badge>
@@ -596,8 +454,8 @@ export default function HomePage() {
                 We combine technical expertise with business understanding to
                 deliver exceptional results
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
@@ -626,15 +484,8 @@ export default function HomePage() {
                 stat: "On Time",
               },
             ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -8 }}
-              >
-                <Card className="h-full text-center group cursor-pointer overflow-hidden relative bg-background/80 backdrop-blur-sm">
+              <div key={index}>
+                <Card className="h-full text-center group cursor-pointer overflow-hidden relative bg-background/80 backdrop-blur-sm hover:-translate-y-2 transition-all duration-300 hover:shadow-lg">
                   <CardContent className="p-6">
                     <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300 group-hover:shadow-lg">
                       <item.icon className="w-8 h-8 text-primary" />
@@ -648,7 +499,7 @@ export default function HomePage() {
                     </Badge>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -657,14 +508,8 @@ export default function HomePage() {
       {/* Testimonials Section */}
       <section className="py-24 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="text-center max-w-2xl mx-auto mb-16"
-          >
-            <motion.div variants={fadeInUp}>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 Testimonials
               </Badge>
@@ -674,52 +519,44 @@ export default function HomePage() {
               <p className="text-muted-foreground">
                 Trusted by businesses across India
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           <div className="max-w-4xl mx-auto">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTestimonial}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Card className="text-center p-8 lg:p-12 shadow-xl bg-background/80 backdrop-blur-sm">
-                  <CardContent>
-                    <div className="flex justify-center gap-1 mb-6">
-                      {[...Array(testimonials[activeTestimonial].rating)].map(
-                        (_, i) => (
-                          <Star
-                            key={i}
-                            className="w-5 h-5 fill-primary text-primary"
-                          />
-                        ),
-                      )}
-                    </div>
-                    <p className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
-                      "{testimonials[activeTestimonial].content}"
-                    </p>
-                    <div className="flex items-center justify-center gap-4">
-                      <img
-                        src={testimonials[activeTestimonial].image}
-                        alt={testimonials[activeTestimonial].name}
-                        className="w-14 h-14 rounded-full object-cover ring-4 ring-primary/20"
-                      />
-                      <div className="text-left">
-                        <div className="font-semibold text-lg">
-                          {testimonials[activeTestimonial].name}
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {testimonials[activeTestimonial].role}
-                        </div>
+            <div>
+              <Card className="text-center p-8 lg:p-12 shadow-xl bg-background/80 backdrop-blur-sm transition-all duration-300">
+                <CardContent>
+                  <div className="flex justify-center gap-1 mb-6">
+                    {[...Array(testimonials[activeTestimonial].rating)].map(
+                      (_, i) => (
+                        <Star
+                          key={i}
+                          className="w-5 h-5 fill-primary text-primary"
+                        />
+                      ),
+                    )}
+                  </div>
+                  <p className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
+                    "{testimonials[activeTestimonial].content}"
+                  </p>
+                  <div className="flex items-center justify-center gap-4">
+                    <img
+                      src={testimonials[activeTestimonial].image}
+                      alt={testimonials[activeTestimonial].name}
+                      className="w-14 h-14 rounded-full object-cover ring-4 ring-primary/20"
+                    />
+                    <div className="text-left">
+                      <div className="font-semibold text-lg">
+                        {testimonials[activeTestimonial].name}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {testimonials[activeTestimonial].role}
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </AnimatePresence>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
 
             <div className="flex justify-center gap-2 mt-8">
               {testimonials.map((_, index) => (
@@ -749,23 +586,15 @@ export default function HomePage() {
           color="white"
           size="w-96 h-96"
           className="top-10 left-10"
-          delay={0}
         />
         <FloatingBlob
           color="white"
           size="w-80 h-80"
           className="bottom-20 right-20"
-          delay={2}
         />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto"
-          >
+          <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4">
               Ready to Transform Your Business?
             </h2>
@@ -795,9 +624,10 @@ export default function HomePage() {
                 </Button>
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </main>
   );
 }
+

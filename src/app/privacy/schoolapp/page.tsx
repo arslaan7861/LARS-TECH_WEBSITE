@@ -1,8 +1,5 @@
 // app/privacy/schoolapp/page.tsx
 
-"use client";
-
-import { motion } from "framer-motion";
 import {
   Shield,
   Bell,
@@ -22,23 +19,6 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
-
-// Animation variants (shared with homepage)
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
 
 // Data the app accesses (already managed by the school) — student-facing
 const accessedDataStudents = [
@@ -162,61 +142,41 @@ export default function SchoolAppPrivacyPage() {
       {/* Hero */}
       <section className="relative pt-20 pb-16 lg:pt-28 lg:pb-20 z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <motion.div variants={fadeInUp}>
+          <div className="max-w-3xl mx-auto text-center">
+            <div>
               <Badge className="mb-6 bg-primary/10 text-primary hover:bg-primary/20 transition-all duration-300 px-4 py-1.5 text-sm backdrop-blur-sm">
                 <Sparkles className="w-3 h-3 mr-1 inline" />
                 School ERP App — Students, Teachers &amp; Admins
               </Badge>
-            </motion.div>
+            </div>
 
-            <motion.h1
-              variants={fadeInUp}
-              className="text-4xl lg:text-5xl font-bold mb-4 leading-tight"
-            >
+            <h1 className="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
               <span className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                 Privacy Policy
               </span>
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              variants={fadeInUp}
-              className="text-muted-foreground text-lg mb-2"
-            >
+            <p className="text-muted-foreground text-lg mb-2">
               Effective Date: August 2, 2026
-            </motion.p>
+            </p>
 
-            <motion.p
-              variants={fadeInUp}
-              className="text-muted-foreground leading-relaxed"
-            >
+            <p className="text-muted-foreground leading-relaxed">
               This Privacy Policy explains how the School ERP App ("the App")
               handles information when you use our services. The App is
               intended for students, teachers, and administrators of schools
               using our School ERP platform, and allows each type of user to
               securely access and, where authorized, manage information
               maintained by their educational institution.
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Information We Access — Students */}
       <section className="py-16 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-            className="max-w-2xl mx-auto text-center mb-12"
-          >
-            <motion.div variants={fadeInUp}>
+          <div className="max-w-2xl mx-auto text-center mb-12">
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 <Eye className="w-3 h-3 mr-1 inline" />
                 What We Access — Students
@@ -231,22 +191,18 @@ export default function SchoolAppPrivacyPage() {
                 information for students beyond what is required for
                 authentication and providing these services.
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
             {accessedDataStudents.map((item, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                viewport={{ once: true }}
                 className="flex items-center gap-3 p-3 rounded-xl bg-background/80 backdrop-blur-sm border hover:border-primary/30 transition-colors"
               >
                 <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
                 <span className="text-sm">{item}</span>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -255,14 +211,8 @@ export default function SchoolAppPrivacyPage() {
       {/* Information We Access — Teachers & Admins */}
       <section className="py-16 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={staggerContainer}
-            className="max-w-2xl mx-auto text-center mb-12"
-          >
-            <motion.div variants={fadeInUp}>
+          <div className="max-w-2xl mx-auto text-center mb-12">
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 <Users className="w-3 h-3 mr-1 inline" />
                 What We Access — Teachers &amp; Admins
@@ -277,22 +227,18 @@ export default function SchoolAppPrivacyPage() {
                 duties, class and student records within their assigned
                 scope.
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
             {accessedDataStaff.map((item, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                viewport={{ once: true }}
                 className="flex items-center gap-3 p-3 rounded-xl bg-background/80 backdrop-blur-sm border hover:border-primary/30 transition-colors"
               >
                 <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
                 <span className="text-sm">{item}</span>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -302,12 +248,7 @@ export default function SchoolAppPrivacyPage() {
       <section className="py-16 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-10 items-center max-w-5xl mx-auto">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 <Bell className="w-3 h-3 mr-1 inline" />
                 Notifications
@@ -322,26 +263,19 @@ export default function SchoolAppPrivacyPage() {
                 the notification service. This token is used solely to
                 deliver notifications to your device.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={staggerContainer}
-              className="grid grid-cols-2 gap-3"
-            >
+            <div className="grid grid-cols-2 gap-3">
               {notificationTypes.map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  variants={fadeInUp}
                   className="flex items-start gap-2 p-3 rounded-lg bg-background/80 backdrop-blur-sm border text-sm"
                 >
                   <Bell className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
                   <span>{item}</span>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -349,14 +283,8 @@ export default function SchoolAppPrivacyPage() {
       {/* Information We Do Not Collect */}
       <section className="py-16 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="max-w-2xl mx-auto text-center mb-12"
-          >
-            <motion.div variants={fadeInUp}>
+          <div className="max-w-2xl mx-auto text-center mb-12">
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 <Shield className="w-3 h-3 mr-1 inline" />
                 What We Don't Do
@@ -368,22 +296,18 @@ export default function SchoolAppPrivacyPage() {
                 The App does not collect or sell personal information — for
                 any user role — for advertising or marketing purposes.
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           <div className="grid sm:grid-cols-2 gap-3 max-w-3xl mx-auto">
             {doesNotCollect.map((item, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                viewport={{ once: true }}
                 className="flex items-start gap-3 p-3 rounded-xl bg-background/80 backdrop-blur-sm border"
               >
                 <XCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
                 <span className="text-sm">{item}</span>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -392,14 +316,8 @@ export default function SchoolAppPrivacyPage() {
       {/* How Information Is Used */}
       <section className="py-16 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="max-w-2xl mx-auto text-center mb-12"
-          >
-            <motion.div variants={fadeInUp}>
+          <div className="max-w-2xl mx-auto text-center mb-12">
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 <Smartphone className="w-3 h-3 mr-1 inline" />
                 How It's Used
@@ -410,25 +328,19 @@ export default function SchoolAppPrivacyPage() {
               <p className="text-muted-foreground">
                 Information accessed in the App is used only to:
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
             {usagePoints.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                viewport={{ once: true }}
-              >
+              <div key={index}>
                 <Badge
                   variant="secondary"
                   className="px-4 py-2 text-sm font-normal"
                 >
                   {item}
                 </Badge>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -439,13 +351,7 @@ export default function SchoolAppPrivacyPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {policySections.map((section, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                viewport={{ once: true }}
-              >
+              <div key={index}>
                 <Card className="h-full bg-background/80 backdrop-blur-sm hover:shadow-lg transition-all duration-300">
                   <CardContent className="p-6">
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
@@ -459,7 +365,7 @@ export default function SchoolAppPrivacyPage() {
                     </p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -479,13 +385,7 @@ export default function SchoolAppPrivacyPage() {
         />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center max-w-2xl mx-auto"
-          >
+          <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4">
               Your Rights
             </h2>
@@ -503,7 +403,7 @@ export default function SchoolAppPrivacyPage() {
                 Reach out through your school's administrator
               </span>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </main>

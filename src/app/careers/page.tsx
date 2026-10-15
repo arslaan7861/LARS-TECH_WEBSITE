@@ -1,8 +1,6 @@
 "use client";
 
-// src/app/careers/page.tsx
 import { useState } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   Briefcase,
@@ -45,25 +43,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
-
 import { jobOpenings } from "@/data/company";
 
 // Benefits
@@ -234,13 +214,8 @@ export default function CareersPage() {
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24 z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <motion.div variants={fadeInUp}>
+          <div className="text-center max-w-3xl mx-auto">
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 Join Our Team
               </Badge>
@@ -265,8 +240,8 @@ export default function CareersPage() {
                   </Button>
                 </Link>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -288,13 +263,7 @@ export default function CareersPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {culturePoints.map((point, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
+              <div key={index}>
                 <Card className="text-center h-full hover:shadow-lg transition-all duration-300 bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -306,7 +275,7 @@ export default function CareersPage() {
                     </p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -316,12 +285,7 @@ export default function CareersPage() {
       <section className="py-20 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 Our Values
               </Badge>
@@ -347,15 +311,9 @@ export default function CareersPage() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
+            <div className="relative">
               <Card className="overflow-hidden bg-background/80 backdrop-blur-sm">
                 <img
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
@@ -373,7 +331,7 @@ export default function CareersPage() {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -396,13 +354,7 @@ export default function CareersPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                viewport={{ once: true }}
-              >
+              <div key={index}>
                 <Card className="h-full hover:shadow-lg transition-all duration-300 group bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6 text-center">
                     <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
@@ -414,7 +366,7 @@ export default function CareersPage() {
                     </p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -438,13 +390,7 @@ export default function CareersPage() {
 
           <div className="space-y-4">
             {jobOpenings.map((job) => (
-              <motion.div
-                key={job.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-              >
+              <div key={job.id}>
                 <Card className="hover:shadow-lg transition-all duration-300 bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
@@ -515,7 +461,7 @@ export default function CareersPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -525,12 +471,7 @@ export default function CareersPage() {
       <section id="application-form" className="py-20 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 Apply Now
               </Badge>
@@ -566,14 +507,9 @@ export default function CareersPage() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <Card className="bg-background/80 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle>Application Form</CardTitle>
@@ -674,7 +610,7 @@ export default function CareersPage() {
                   </form>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -682,12 +618,7 @@ export default function CareersPage() {
       {/* Why Join Us Section - CTA */}
       <section className="py-20 bg-primary relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <h2 className="text-3xl lg:text-4xl font-bold text-primary-foreground mb-4">
               Start Your Journey With Us
             </h2>
@@ -712,7 +643,7 @@ export default function CareersPage() {
                 </Button>
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </main>

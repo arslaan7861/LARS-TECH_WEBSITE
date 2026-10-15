@@ -1,8 +1,4 @@
-"use client";
-
 // src/app/about/page.tsx
-import { useEffect, useRef } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
 import Link from "next/link";
 import {
   Code,
@@ -35,23 +31,6 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
 
 import {
@@ -91,16 +70,6 @@ const Globe = ({ className }: { className?: string }) => (
 );
 
 export default function AboutPage() {
-  const controls = useAnimation();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [controls, isInView]);
-
   return (
     <main className="min-h-screen overflow-x-hidden">
       {/* Consistent Background Layer */}
@@ -147,13 +116,8 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24 z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <motion.div variants={fadeInUp}>
+          <div className="text-center max-w-3xl mx-auto">
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 About Us
               </Badge>
@@ -165,8 +129,8 @@ export default function AboutPage() {
                 problem-solvers dedicated to building software that drives real
                 business growth.
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -175,12 +139,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Mission */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <Card className="h-full hover:shadow-lg transition-all duration-300 bg-background/80 backdrop-blur-sm">
                 <CardHeader>
                   <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-4">
@@ -210,15 +169,10 @@ export default function AboutPage() {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
 
             {/* Vision */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <Card className="h-full hover:shadow-lg transition-all duration-300 bg-background/80 backdrop-blur-sm">
                 <CardHeader>
                   <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-4">
@@ -248,7 +202,7 @@ export default function AboutPage() {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -256,15 +210,9 @@ export default function AboutPage() {
       {/* Stats Section */}
       <section className="py-20 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            ref={ref}
-            initial="hidden"
-            animate={controls}
-            variants={staggerContainer}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6"
-          >
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {stats.map((stat, index) => (
-              <motion.div key={index} variants={fadeInUp}>
+              <div key={index}>
                 <Card className="text-center hover:shadow-lg transition-all duration-300 bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <stat.icon className="w-8 h-8 text-primary mx-auto mb-3" />
@@ -277,9 +225,9 @@ export default function AboutPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -299,15 +247,9 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            variants={staggerContainer}
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
-              <motion.div key={index} variants={fadeInUp}>
+              <div key={index}>
                 <Card className="h-full text-center hover:shadow-lg transition-all duration-300 group bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
@@ -321,9 +263,9 @@ export default function AboutPage() {
                     </p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -348,12 +290,8 @@ export default function AboutPage() {
 
             <div className="space-y-8">
               {milestones.map((milestone, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
                   className={cn(
                     "relative lg:grid lg:grid-cols-2 gap-8 items-center",
                     index % 2 === 0 ? "lg:text-right" : "lg:text-left",
@@ -389,7 +327,7 @@ export default function AboutPage() {
                       </CardContent>
                     </Card>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -411,15 +349,9 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            variants={staggerContainer}
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member, index) => (
-              <motion.div key={index} variants={fadeInUp}>
+              <div key={index}>
                 <Card className="text-center hover:shadow-xl transition-all duration-300 group bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <Avatar className="w-32 h-32 mx-auto mb-4 ring-4 ring-primary/10 group-hover:ring-primary/20 transition-all">
@@ -435,9 +367,9 @@ export default function AboutPage() {
                     </p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -445,12 +377,7 @@ export default function AboutPage() {
       <section className="py-20 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 Our Location
               </Badge>
@@ -473,15 +400,9 @@ export default function AboutPage() {
                   <span>Serving clients across India & International</span>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
+            <div className="relative">
               <Card className="overflow-hidden bg-background/80 backdrop-blur-sm">
                 <img
                   src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?w=600&h=400&fit=crop"
@@ -505,7 +426,7 @@ export default function AboutPage() {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -513,12 +434,7 @@ export default function AboutPage() {
       {/* CTA Section */}
       <section className="py-20 bg-primary relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <h2 className="text-3xl lg:text-4xl font-bold text-primary-foreground mb-4">
               Ready to Start Your Journey With Us?
             </h2>
@@ -543,7 +459,7 @@ export default function AboutPage() {
                 </Button>
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </main>

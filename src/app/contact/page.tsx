@@ -1,8 +1,6 @@
 "use client";
 
-// src/app/contact/page.tsx
 import { useState } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   Phone,
@@ -38,23 +36,6 @@ import {
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { cn } from "@/lib/utils";
-
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
 
 import {
@@ -186,13 +167,8 @@ export default function ContactPage() {
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24 z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <motion.div variants={fadeInUp}>
+          <div className="text-center max-w-3xl mx-auto">
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 Get in Touch
               </Badge>
@@ -203,23 +179,17 @@ export default function ContactPage() {
                 Have a project in mind? We'd love to hear about it. Our team is
                 ready to help you transform your ideas into reality.
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Contact Methods Grid */}
       <section className="py-12 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            variants={staggerContainer}
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactMethods.map((method, index) => (
-              <motion.div key={index} variants={fadeInUp}>
+              <div key={index}>
                 <a
                   href={method.href}
                   target={method.title === "Office" ? "_blank" : "_self"}
@@ -244,9 +214,9 @@ export default function ContactPage() {
                     </CardContent>
                   </Card>
                 </a>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -255,13 +225,7 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Contact Information */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="lg:col-span-1"
-            >
+            <div className="lg:col-span-1">
               <div className="sticky top-24 space-y-6">
                 <Card className="bg-background/80 backdrop-blur-sm">
                   <CardHeader>
@@ -324,16 +288,10 @@ export default function ContactPage() {
                   </CardContent>
                 </Card>
               </div>
-            </motion.div>
+            </div>
 
             {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="lg:col-span-2"
-            >
+            <div className="lg:col-span-2">
               <Card className="bg-background/80 backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle className="text-2xl">Send Us a Message</CardTitle>
@@ -344,11 +302,7 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent>
                   {isSubmitted ? (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="text-center py-12"
-                    >
+                    <div className="text-center py-12">
                       <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
                         <CheckCircle2 className="w-8 h-8 text-green-600" />
                       </div>
@@ -359,7 +313,7 @@ export default function ContactPage() {
                         Thank you for reaching out. We'll get back to you
                         shortly.
                       </p>
-                    </motion.div>
+                    </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid md:grid-cols-2 gap-4">
@@ -548,7 +502,7 @@ export default function ContactPage() {
                   )}
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -570,12 +524,7 @@ export default function ContactPage() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <Card className="overflow-hidden bg-background/80 backdrop-blur-sm">
                 <div className="aspect-video bg-muted relative">
                   <iframe
@@ -591,15 +540,9 @@ export default function ContactPage() {
                   />
                 </div>
               </Card>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="space-y-4"
-            >
+            <div className="space-y-4">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-6 h-6 text-primary" />
@@ -654,7 +597,7 @@ export default function ContactPage() {
                   </Link>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -662,12 +605,7 @@ export default function ContactPage() {
       {/* FAQ CTA Section */}
       <section className="py-20 bg-primary relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <h2 className="text-3xl lg:text-4xl font-bold text-primary-foreground mb-4">
               Frequently Asked Questions?
             </h2>
@@ -681,7 +619,7 @@ export default function ContactPage() {
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
     </main>

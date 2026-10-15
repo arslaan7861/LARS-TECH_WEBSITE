@@ -2,8 +2,7 @@
 
 // src/app/school-erp/page.tsx
 
-import { useState, useEffect, useRef } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+import { useState } from "react";
 import Link from "next/link";
 import {
   School,
@@ -56,22 +55,6 @@ import {
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
 
 import {
@@ -87,15 +70,6 @@ import {
 
 export default function SchoolERPMergedPage() {
   const [activeCategory, setActiveCategory] = useState("all");
-  const controls = useAnimation();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [controls, isInView]);
 
   const filteredFeatures =
     activeCategory === "all"
@@ -148,12 +122,8 @@ export default function SchoolERPMergedPage() {
       <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24 z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={staggerContainer}
-            >
-              <motion.div variants={fadeInUp}>
+            <div>
+              <div>
                 <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                   Flagship Product
                 </Badge>
@@ -197,15 +167,10 @@ export default function SchoolERPMergedPage() {
                     </div>
                   ))}
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              className="relative"
-            >
+            <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src="school-erp.png"
@@ -227,7 +192,7 @@ export default function SchoolERPMergedPage() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -235,15 +200,9 @@ export default function SchoolERPMergedPage() {
       {/* Benefits Stats Section */}
       <section className="py-16 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            ref={ref}
-            initial="hidden"
-            animate={controls}
-            variants={staggerContainer}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
-          >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {keyBenefits.map((benefit, index) => (
-              <motion.div key={index} variants={fadeInUp}>
+              <div key={index}>
                 <Card className="text-center hover:shadow-lg transition-all duration-300 bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -258,9 +217,9 @@ export default function SchoolERPMergedPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -282,13 +241,7 @@ export default function SchoolERPMergedPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {quickFeatures.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                viewport={{ once: true }}
-              >
+              <div key={index}>
                 <Card className="group h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-background/80 backdrop-blur-sm">
                   <CardHeader>
                     <div
@@ -302,7 +255,7 @@ export default function SchoolERPMergedPage() {
                     <CardTitle className="text-lg">{feature.title}</CardTitle>
                   </CardHeader>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -344,20 +297,9 @@ export default function SchoolERPMergedPage() {
             </div>
 
             <TabsContent value={activeCategory} className="mt-6">
-              <motion.div
-                key={activeCategory}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-              >
-                {filteredFeatures.map((feature, index) => (
-                  <motion.div
-                    key={feature.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
-                  >
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredFeatures.map((feature) => (
+                  <div key={feature.id}>
                     <Card className="group h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-background/80 backdrop-blur-sm">
                       <CardHeader>
                         <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -384,9 +326,9 @@ export default function SchoolERPMergedPage() {
                         </div>
                       </CardContent>
                     </Card>
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
+              </div>
             </TabsContent>
           </Tabs>
         </div>
@@ -396,12 +338,7 @@ export default function SchoolERPMergedPage() {
       <section className="py-20 relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 Modern Platform
               </Badge>
@@ -444,15 +381,9 @@ export default function SchoolERPMergedPage() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
+            <div className="relative">
               <div className="grid grid-cols-2 gap-4">
                 <img
                   src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=300&h=400&fit=crop"
@@ -465,7 +396,7 @@ export default function SchoolERPMergedPage() {
                   className="rounded-xl shadow-lg mt-8"
                 />
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -487,12 +418,8 @@ export default function SchoolERPMergedPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {pricingPlans.map((plan, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
                 className={cn("relative", plan.popular && "lg:-mt-4")}
               >
                 {plan.popular && (
@@ -544,7 +471,7 @@ export default function SchoolERPMergedPage() {
                     </Button>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -568,13 +495,7 @@ export default function SchoolERPMergedPage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
+              <div key={index}>
                 <Card className="h-full bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <div className="flex gap-1 mb-4">
@@ -607,7 +528,7 @@ export default function SchoolERPMergedPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -644,12 +565,7 @@ export default function SchoolERPMergedPage() {
       {/* CTA Section */}
       <section className="py-20 bg-primary relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <h2 className="text-3xl lg:text-4xl font-bold text-primary-foreground mb-4">
               Ready to Digitize Your School?
             </h2>
@@ -674,9 +590,10 @@ export default function SchoolERPMergedPage() {
                 </Button>
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </main>
   );
 }
+

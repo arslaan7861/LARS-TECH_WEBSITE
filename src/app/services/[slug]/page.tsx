@@ -2,8 +2,6 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 import Link from "next/link";
 import {
   Code,
@@ -165,27 +163,14 @@ export default function ServiceDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
   const service = getServiceBySlug(slug);
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
 
   if (!service) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", duration: 0.6 }}
-          >
-            <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Sparkles className="w-12 h-12 text-primary" />
-            </div>
-          </motion.div>
+          <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Sparkles className="w-12 h-12 text-primary" />
+          </div>
           <h1 className="text-4xl font-bold mb-4">Service Not Found</h1>
           <p className="text-muted-foreground mb-8">
             The service you're looking for doesn't exist.
@@ -244,12 +229,8 @@ export default function ServiceDetailPage() {
       </div>
 
       {/* Hero Section */}
-      <section
-        ref={heroRef}
-        className="relative overflow-hidden pt-20 lg:pt-32 pb-16 z-0"
-      >
-        <motion.div
-          style={{ opacity: heroOpacity, scale: heroScale }}
+      <section className="relative overflow-hidden pt-20 lg:pt-32 pb-16 z-0">
+        <div
           className={cn(
             "absolute inset-0 bg-gradient-to-br",
             service.bgGradient,
@@ -258,11 +239,7 @@ export default function ServiceDetailPage() {
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+            <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6 backdrop-blur-sm">
                 <Sparkles className="w-3 h-3" />
                 <span>Premium Service</span>
@@ -298,36 +275,19 @@ export default function ServiceDetailPage() {
                   </Button>
                 </Link>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              className="relative"
-            >
+            <div className="relative">
               <div
                 className={cn(
                   "relative w-full aspect-square rounded-3xl bg-gradient-to-br flex items-center justify-center shadow-2xl",
                   service.gradient,
                 )}
               >
-                <motion.div
-                  animate={{ scale: [1, 1.05, 1], rotate: [0, 5, -5, 0] }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                  }}
-                >
+                <div>
                   <service.icon className="w-32 h-32 text-white opacity-90" />
-                </motion.div>
-                <motion.div
-                  initial={{ x: -50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.8 }}
-                  className="absolute -left-8 top-8 bg-background/90 backdrop-blur-sm rounded-xl shadow-lg p-3"
-                >
+                </div>
+                <div className="absolute -left-8 top-8 bg-background/90 backdrop-blur-sm rounded-xl shadow-lg p-3">
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
                       <Users className="w-4 h-4 text-primary" />
@@ -339,13 +299,8 @@ export default function ServiceDetailPage() {
                       <div className="font-bold">120+</div>
                     </div>
                   </div>
-                </motion.div>
-                <motion.div
-                  initial={{ x: 50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 1 }}
-                  className="absolute -right-8 bottom-8 bg-background/90 backdrop-blur-sm rounded-xl shadow-lg p-3"
-                >
+                </div>
+                <div className="absolute -right-8 bottom-8 bg-background/90 backdrop-blur-sm rounded-xl shadow-lg p-3">
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
                       <Star className="w-4 h-4 text-primary fill-primary" />
@@ -357,9 +312,9 @@ export default function ServiceDetailPage() {
                       <div className="font-bold">4.9/5</div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -369,11 +324,8 @@ export default function ServiceDetailPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {service.stats.map((stat, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
                 className="flex items-center justify-center gap-4"
               >
                 <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
@@ -385,7 +337,7 @@ export default function ServiceDetailPage() {
                     {stat.label}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -407,14 +359,8 @@ export default function ServiceDetailPage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {service.benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-              >
-                <Card className="h-full text-center hover:shadow-xl transition-all bg-background/80 backdrop-blur-sm">
+              <div key={index}>
+                <Card className="h-full text-center hover:shadow-xl transition-all hover:-translate-y-1 bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                       <Gem className="w-6 h-6 text-primary" />
@@ -428,7 +374,7 @@ export default function ServiceDetailPage() {
                     </Badge>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -450,14 +396,8 @@ export default function ServiceDetailPage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {service.features.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.02 }}
-              >
-                <Card className="h-full hover:shadow-lg transition-all cursor-pointer bg-background/80 backdrop-blur-sm">
+              <div key={index}>
+                <Card className="h-full hover:shadow-lg transition-all hover:scale-[1.01] cursor-pointer bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
                       <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -472,7 +412,7 @@ export default function ServiceDetailPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -527,12 +467,7 @@ export default function ServiceDetailPage() {
           <Card className="max-w-2xl mx-auto bg-background/80 backdrop-blur-sm">
             <CardContent className="p-8 space-y-6">
               {service.technologies.map((tech, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
+                <div key={index}>
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <tech.icon className="w-4 h-4 text-primary" />
@@ -543,7 +478,7 @@ export default function ServiceDetailPage() {
                     </span>
                   </div>
                   <Progress value={tech.level} className="h-2" />
-                </motion.div>
+                </div>
               ))}
             </CardContent>
           </Card>
@@ -566,12 +501,7 @@ export default function ServiceDetailPage() {
           </div>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {service.testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-              >
+              <div key={index}>
                 <Card className="h-full bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <div className="flex gap-1 mb-4">
@@ -603,7 +533,7 @@ export default function ServiceDetailPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -674,14 +604,8 @@ export default function ServiceDetailPage() {
                 color: "from-cyan-500 to-blue-500",
               },
             ].map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-              >
-                <Card className="h-full hover:shadow-xl transition-all bg-background/80 backdrop-blur-sm">
+              <div key={index}>
+                <Card className="h-full hover:shadow-xl transition-all hover:-translate-y-1 bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <div className="text-4xl font-bold text-primary/20 mb-4">
                       {step.step}
@@ -700,7 +624,7 @@ export default function ServiceDetailPage() {
                     </p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -712,25 +636,12 @@ export default function ServiceDetailPage() {
           className={cn("absolute inset-0 bg-gradient-to-r", service.gradient)}
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
-          >
+          <div className="max-w-4xl mx-auto">
             <Card className="bg-white/10 backdrop-blur-xl border-white/20 shadow-2xl">
               <CardContent className="p-8 lg:p-12 text-center">
-                <motion.div
-                  animate={{ scale: [1, 1.1, 1], rotate: [0, 10, -10, 0] }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                  }}
-                  className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-6"
-                >
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-6">
                   <Sparkles className="w-8 h-8 text-white" />
-                </motion.div>
+                </div>
                 <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
                   Ready to Transform Your Business?
                 </h2>
@@ -776,9 +687,10 @@ export default function ServiceDetailPage() {
                 </div>
               </CardContent>
             </Card>
-          </motion.div>
+          </div>
         </div>
       </section>
     </main>
   );
 }
+

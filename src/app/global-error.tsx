@@ -3,10 +3,8 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { AlertCircle, Home, RefreshCw, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 
 export default function GlobalError({
   error,
@@ -25,39 +23,19 @@ export default function GlobalError({
       <body>
         <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted/20 flex items-center justify-center p-4">
           <div className="max-w-md mx-auto text-center">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", duration: 0.6 }}
-              className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6"
-            >
+            <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
               <AlertCircle className="w-10 h-10 text-red-500" />
-            </motion.div>
+            </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-2xl font-bold text-foreground mb-2"
-            >
+            <h1 className="text-2xl font-bold text-foreground mb-2">
               Something Went Wrong
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-muted-foreground mb-8"
-            >
+            <p className="text-muted-foreground mb-8">
               We apologize for the inconvenience. Our team has been notified.
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button onClick={reset} className="group">
                 <RefreshCw className="mr-2 w-4 h-4 group-hover:rotate-180 transition-transform duration-500" />
                 Try Again
@@ -69,17 +47,12 @@ export default function GlobalError({
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
-            </motion.div>
+            </div>
 
             {error.digest && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="mt-8 text-xs text-muted-foreground"
-              >
+              <p className="mt-8 text-xs text-muted-foreground">
                 Error ID: {error.digest}
-              </motion.p>
+              </p>
             )}
           </div>
         </div>
@@ -87,3 +60,4 @@ export default function GlobalError({
     </html>
   );
 }
+

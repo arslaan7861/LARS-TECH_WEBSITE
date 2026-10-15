@@ -1,8 +1,7 @@
 "use client";
 
 // src/app/services/page.tsx
-import { useState, useEffect, useRef } from "react";
-import { motion, useInView, useAnimation } from "framer-motion";
+import { useState } from "react";
 import Link from "next/link";
 import {
   Code,
@@ -36,24 +35,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
 import { AnimatedBlobs, FloatingBlob } from "@/components/common/blobs";
-
 import { servicesData } from "@/data/services";
 
 // Map servicesData to format expected by services/page.tsx tabs and cards
@@ -149,15 +131,6 @@ const whyChooseUs = [
 
 export default function ServicesPage() {
   const [activeService, setActiveService] = useState("custom-software");
-  const controls = useAnimation();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [controls, isInView]);
 
   return (
     <main className="min-h-screen overflow-x-hidden">
@@ -175,42 +148,29 @@ export default function ServicesPage() {
           color="primary"
           size="w-[500px] h-[500px]"
           className="top-20 left-10"
-          delay={0}
-          speed={25}
         />
         <FloatingBlob
           color="cyan"
           size="w-[600px] h-[600px]"
           className="bottom-40 right-20"
-          delay={3}
-          speed={30}
         />
         <FloatingBlob
           color="blue"
           size="w-[450px] h-[450px]"
           className="top-1/3 right-1/4"
-          delay={6}
-          speed={22}
         />
         <FloatingBlob
           color="purple"
           size="w-[550px] h-[550px]"
           className="bottom-1/3 left-1/4"
-          delay={9}
-          speed={28}
         />
       </div>
 
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 lg:pt-32 lg:pb-24 z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <motion.div variants={fadeInUp}>
+          <div className="text-center max-w-3xl mx-auto">
+            <div>
               <Badge className="mb-4 bg-primary/10 text-primary backdrop-blur-sm">
                 What We Do
               </Badge>
@@ -235,8 +195,8 @@ export default function ServicesPage() {
                   </Button>
                 </Link>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -256,14 +216,8 @@ export default function ServicesPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
+            {services.map((service) => (
+              <div key={service.id}>
                 <Link href={`/services/${service.slug}`}>
                   <Card className="group h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer bg-background/80 backdrop-blur-sm">
                     <CardHeader>
@@ -288,7 +242,7 @@ export default function ServicesPage() {
                     </CardContent>
                   </Card>
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -336,12 +290,7 @@ export default function ServicesPage() {
 
             {services.map((service) => (
               <TabsContent key={service.id} value={service.id}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="grid lg:grid-cols-2 gap-8"
-                >
+                <div className="grid lg:grid-cols-2 gap-8">
                   <div>
                     <div
                       className={cn(
@@ -439,7 +388,7 @@ export default function ServicesPage() {
                       </Card>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </TabsContent>
             ))}
           </Tabs>
@@ -461,14 +410,8 @@ export default function ServicesPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {processSteps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
+            {processSteps.map((step) => (
+              <div key={step.step}>
                 <Card className="relative h-full hover:shadow-lg transition-all duration-300 bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <div className="text-4xl font-bold text-primary/20 mb-4">
@@ -483,7 +426,7 @@ export default function ServicesPage() {
                     </p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -506,14 +449,8 @@ export default function ServicesPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {whyChooseUs.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
+            {whyChooseUs.map((item) => (
+              <div key={item.title}>
                 <Card className="h-full text-center hover:shadow-lg transition-all duration-300 group bg-background/80 backdrop-blur-sm">
                   <CardContent className="p-6">
                     <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
@@ -525,7 +462,7 @@ export default function ServicesPage() {
                     </p>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -534,12 +471,7 @@ export default function ServicesPage() {
       {/* CTA Section */}
       <section className="py-20 bg-primary relative z-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <h2 className="text-3xl lg:text-4xl font-bold text-primary-foreground mb-4">
               Ready to Build Your Next Project?
             </h2>
@@ -564,9 +496,10 @@ export default function ServicesPage() {
                 </Button>
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </main>
   );
 }
+

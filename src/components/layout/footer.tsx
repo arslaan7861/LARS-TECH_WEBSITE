@@ -3,14 +3,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   Mail,
   Phone,
   MapPin,
   Send,
   ArrowRight,
-  Sparkles,
   Heart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -69,20 +67,6 @@ const footerLinks = {
   },
 };
 
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
 export function Footer() {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -110,24 +94,18 @@ export function Footer() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="py-12 lg:py-16"
-        >
+        <div className="py-12 lg:py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
             {/* Company Info */}
-            <motion.div variants={fadeInUp} className="lg:col-span-2 space-y-4">
+            <div className="lg:col-span-2 space-y-4">
               <Link href="/" className="group relative">
-                <div className="h-20 aspect-[2.27941176471] relative  transition-all duration-300">
+                <div className="h-20 aspect-[2.27941176471] relative transition-all duration-300">
                   <Image
                     src={"/logo-full.png"}
                     fill
                     alt="logo"
                     sizes="(max-width: 640px) 80px, (max-width: 1024px) 100px, 120px"
-                  ></Image>
+                  />
                 </div>
               </Link>
 
@@ -139,28 +117,27 @@ export function Footer() {
 
               <div className="flex space-x-2">
                 {socialLinks.map((social) => (
-                  <motion.a
+                  <a
                     key={social.name}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ y: -3 }}
                     className={cn(
-                      "p-2.5 bg-background rounded-xl text-muted-foreground transition-all duration-300",
+                      "p-2.5 bg-background rounded-xl text-muted-foreground transition-all duration-300 hover:-translate-y-1",
                       "border border-border hover:text-white",
                       social.color,
                     )}
                     aria-label={social.name}
                   >
                     <social.icon className="w-4 h-4" />
-                  </motion.a>
+                  </a>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
             {/* Quick Links */}
             {Object.values(footerLinks).map((section) => (
-              <motion.div key={section.title} variants={fadeInUp}>
+              <div key={section.title}>
                 <h3 className="text-foreground font-semibold text-lg mb-4">
                   {section.title}
                 </h3>
@@ -177,20 +154,15 @@ export function Footer() {
                     </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Contact Bar */}
         <div className="py-6 border-t border-border">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center gap-3 text-muted-foreground group"
-            >
+            <div className="flex items-center gap-3 text-muted-foreground group">
               <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                 <MapPin className="w-5 h-5 text-primary" />
               </div>
@@ -200,14 +172,9 @@ export function Footer() {
                   {siteConfig.address.display}
                 </span>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex items-center gap-3 text-muted-foreground group"
-            >
+            <div className="flex items-center gap-3 text-muted-foreground group">
               <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                 <Phone className="w-5 h-5 text-primary" />
               </div>
@@ -220,14 +187,9 @@ export function Footer() {
                   {siteConfig.contact.phone}
                 </a>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex items-center gap-3 text-muted-foreground group"
-            >
+            <div className="flex items-center gap-3 text-muted-foreground group">
               <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                 <Mail className="w-5 h-5 text-primary" />
               </div>
@@ -240,7 +202,7 @@ export function Footer() {
                   {siteConfig.contact.email}
                 </a>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
 
@@ -261,3 +223,4 @@ export function Footer() {
     </footer>
   );
 }
+

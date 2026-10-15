@@ -1,33 +1,18 @@
-// components/ui/blobs.tsx
+// components/common/blobs.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 
-// Animated Blobs Component - Animates on desktop, static on mobile
+// Stationary Blobs Component - Fixed positions, zero continuous animation loop
 export const AnimatedBlobs = ({
   count = 6,
   color = "primary",
-  baseDelay = 0,
 }: {
   count?: number;
   color?: "primary" | "white" | "blue" | "cyan" | "purple";
   baseDelay?: number;
 }) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
   const getColorClass = () => {
     switch (color) {
       case "primary":
@@ -45,78 +30,39 @@ export const AnimatedBlobs = ({
     }
   };
 
-  // Generate blob configurations
-  const blobs = Array.from({ length: count }, (_, i) => {
-    const size = Math.random() * 400 + 200;
-    const duration = Math.random() * 30 + 25;
-    const delay = baseDelay + Math.random() * 10;
-    const startX = Math.random() * 100;
-    const startY = Math.random() * 100;
-    const xMove = (Math.random() - 0.5) * 30;
-    const yMove = (Math.random() - 0.5) * 30;
+  // Generate deterministic stationary blob positions
+  const blobs = useMemo(() => {
+    return Array.from({ length: count }, (_, i) => {
+      // Deterministic layout based on index so it doesn't shift on re-renders
+      const size = 250 + ((i * 73) % 250);
+      const startX = (i * 37 + 10) % 90;
+      const startY = (i * 47 + 15) % 85;
 
-    return {
-      id: i,
-      size,
-      startX,
-      startY,
-      duration,
-      delay,
-      xMove,
-      yMove,
-      colorClass: getColorClass(),
-    };
-  });
+      return {
+        id: i,
+        size,
+        startX,
+        startY,
+        colorClass: getColorClass(),
+      };
+    });
+  }, [count, color]);
 
-  // On mobile: render static divs
-  if (isMobile) {
-    return (
-      <div
-        className="absolute inset-0 overflow-hidden pointer-events-none"
-        suppressHydrationWarning
-      >
-        {blobs.map((blob) => (
-          <div
-            key={blob.id}
-            className={cn("absolute rounded-full blur-3xl", blob.colorClass)}
-            style={{
-              width: blob.size,
-              height: blob.size,
-              left: `${blob.startX}%`,
-              top: `${blob.startY}%`,
-            }}
-          />
-        ))}
-      </div>
-    );
-  }
-
-  // On desktop: render animated motion divs
   return (
     <div
       className="absolute inset-0 overflow-hidden pointer-events-none"
       suppressHydrationWarning
     >
       {blobs.map((blob) => (
-        <motion.div
+        <div
           key={blob.id}
-          className={cn("absolute rounded-full blur-3xl", blob.colorClass)}
+          className={cn("absolute rounded-full blur-3xl opacity-75", blob.colorClass)}
           style={{
             width: blob.size,
             height: blob.size,
             left: `${blob.startX}%`,
             top: `${blob.startY}%`,
-          }}
-          animate={{
-            x: [0, blob.xMove, -blob.xMove * 0.5, blob.xMove * 0.8, 0],
-            y: [0, blob.yMove, -blob.yMove * 0.6, blob.yMove * 0.7, 0],
-            scale: [1, 1.08, 0.94, 1.06, 1],
-          }}
-          transition={{
-            duration: blob.duration,
-            repeat: Infinity,
-            delay: blob.delay,
-            ease: "easeInOut",
+            transform: "translateZ(0)",
           }}
         />
       ))}
@@ -124,13 +70,11 @@ export const AnimatedBlobs = ({
   );
 };
 
-// Floating Blob Component - Animates on desktop, static on mobile
+// Stationary Floating Blob Component - Static, hardware-accelerated positioning
 export const FloatingBlob = ({
   className,
   color = "primary",
   size = "w-96 h-96",
-  delay = 0,
-  speed = 20,
 }: {
   className?: string;
   color?: string;
@@ -138,19 +82,6 @@ export const FloatingBlob = ({
   delay?: number;
   speed?: number;
 }) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
   const getColorClass = () => {
     switch (color) {
       case "primary":
@@ -169,32 +100,19 @@ export const FloatingBlob = ({
   };
 
   const blobClasses = cn(
-    "absolute rounded-full blur-3xl",
+    "absolute rounded-full blur-3xl opacity-80 pointer-events-none",
     getColorClass(),
     size,
     className,
   );
 
-  // On mobile: render static div
-  if (isMobile) {
-    return <div className={blobClasses} />;
-  }
-
-  // On desktop: render animated motion div
   return (
-    <motion.div
+    <div
       className={blobClasses}
-      animate={{
-        x: [0, 25, -15, 20, 0],
-        y: [0, -15, 20, -10, 0],
-        scale: [1, 1.05, 0.97, 1.03, 1],
-      }}
-      transition={{
-        duration: speed,
-        repeat: Infinity,
-        delay: delay,
-        ease: "easeInOut",
+      style={{
+        transform: "translateZ(0)",
       }}
     />
   );
 };
+
